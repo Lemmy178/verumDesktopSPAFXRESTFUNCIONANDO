@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.verum.spa.gui.PanelTreatment">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="43.0" prefWidth="362.0" text="Lista de Tratamientos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblvTreatTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0">
+               <columns>
+                  <TableColumn fx:id="tblcColumn1" prefWidth="75.0" text="C1" />
+                  <TableColumn fx:id="tblcColumn2" prefWidth="75.0" text="C2" />
+               </columns>
+            </TableView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+               <image>
+                  <Image url="@../../../../../resources/massage.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <VBox fx:id="vBox" prefHeight="500.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="293.0">
+               <children>
+                  <HBox alignment="CENTER" layoutY="390.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <JFXButton id="btnSucces" fx:id="btnNew" accessibleText="NEW" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Nuevo" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="btnInfo" fx:id="btnSave" accessibleText="SAVE" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Guardar" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_accept.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="deleteButton" fx:id="btnDelete" accessibleText="DELETE" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Eliminar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_del.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <JFXTextField fx:id="txtName" focusColor="#009551" layoutX="25.0" layoutY="36.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXTextField fx:id="txtCost" focusColor="#009551" layoutX="25.0" layoutY="85.0" promptText="Costo" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXComboBox fx:id="cmbStatus" editable="true" focusColor="#009551" layoutX="25.0" layoutY="138.0" prefHeight="25.0" prefWidth="205.0" promptText="Estatus" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXTextArea fx:id="txaDescription" focusColor="#009551" layoutX="25.0" layoutY="190.0" prefHeight="87.0" prefWidth="243.0" promptText="Descripción" unFocusColor="#00a65a" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView prefHeight="355.0" prefWidth="287.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0">
+               <columns>
+                  <TableColumn prefWidth="104.0" text="Nombre de sala" />
+                  <TableColumn prefWidth="182.0" text="Temperatura" />
+               </columns>
+            </TableView>
+            <HBox alignment="CENTER" layoutX="50.0" prefHeight="31.0" prefWidth="456.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Label text="Control de salas">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="9999.0" prefWidth="320.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="9999.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" layoutY="101.0" prefHeight="67.0" prefWidth="300.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <JFXButton id="deleteButton" fx:id="btnIncreaseTemperature" stylesheets="@../css/GeneralStyles.css" text="Aumentar temperatura" textFill="WHITE" />
+                        <JFXButton id="btnInfo" fx:id="btnDecreaseTemperature" prefHeight="31.0" prefWidth="171.0" stylesheets="@../css/GeneralStyles.css" text="Disminuir temperatura" textFill="WHITE" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" layoutY="58.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
+                     <children>
+                        <Label text="-00.00 °c">
+                           <font>
+                              <Font name="Monospaced Regular" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="43.0" text="Temperatura actual" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="43.0" />
+                  <JFXComboBox fx:id="cmbStartTime" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="194.0" prefHeight="25.0" prefWidth="254.0" promptText="Hora de inicio" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXComboBox fx:id="cmbEndTime" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="244.0" prefHeight="25.0" prefWidth="254.0" promptText="Hora de término" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="300.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <JFXButton id="btnSucces" fx:id="btnAddProgram" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Nuevo" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="btnInfo" fx:id="btnSaveProgram" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Guardar" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_accept.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="deleteButton" fx:id="btnDeleteProgram" buttonType="RAISED" style="-fx-background-radius: 0;" stylesheets="@../css/GeneralStyles.css" text="Eliminar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_del.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

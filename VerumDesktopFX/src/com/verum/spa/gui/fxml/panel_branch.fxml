@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.verum.spa.gui.PanelBranch">
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="457.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tblList" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="C1" />
+                  <TableColumn prefWidth="75.0" text="C2" />
+               </columns>
+            </TableView>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="398.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Administrar sucursales">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ImageView fitHeight="200.0" fitWidth="200.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+               <image>
+                  <Image url="@../../../../../resources/shop_black.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <VBox prefHeight="500.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="1000.0">
+               <children>
+                  <HBox alignment="CENTER" layoutY="390.0" spacing="6.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <JFXButton id="btnSucces" fx:id="btnAddBranch" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Nuevo" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="btnInfo" fx:id="btnSaveBranch" buttonType="RAISED" prefHeight="0.0" stylesheets="@../css/GeneralStyles.css" text="Guardar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_accept.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="deleteButton" fx:id="btnDeleteBranch" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Eliminar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_del.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding></HBox>
+                  <JFXTextField fx:id="txtName" focusColor="#009551" layoutX="25.0" layoutY="27.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXTextField fx:id="txtAddress" focusColor="#009551" labelFloat="true" layoutX="26.0" layoutY="123.0" prefHeight="25.0" prefWidth="179.0" promptText="Dirección" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXTextField fx:id="txtLatitude" focusColor="#009551" layoutX="26.0" layoutY="160.0" prefHeight="25.0" prefWidth="179.0" promptText="Latitud" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXTextField fx:id="txtLongitude" focusColor="#009551" layoutX="26.0" layoutY="199.0" prefHeight="25.0" prefWidth="179.0" promptText="Longitud" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXComboBox fx:id="cmbStatus" editable="true" focusColor="#009551" layoutX="25.0" layoutY="62.0" prefHeight="25.0" prefWidth="205.0" promptText="Estatus" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <Hyperlink layoutX="24.0" layoutY="237.0" text="Mostrar en el mapa" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
