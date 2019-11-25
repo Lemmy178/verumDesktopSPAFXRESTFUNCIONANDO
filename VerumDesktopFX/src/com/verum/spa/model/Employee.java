@@ -6,7 +6,6 @@
  |                
  | Deficiencies:  No detected.
  *===========================================================================*/
-
 package com.verum.spa.model;
 
 public class Employee extends Person {
@@ -21,11 +20,12 @@ public class Employee extends Person {
     public Employee() {
         this.consumer = new Consumer();
     }
+
     //CONSTRUCTOR FOR LIST
     public Employee(int empId, String empNumber, String empPosition, int empStatus, String photo, int conId,
             String conName, String pass, String role, String firstName, String lastName1, String lastName2,
-            String gender, String perAddress, String telephone, String rfc) {
-        super(firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
+            String gender, String perAddress, String telephone, String rfc, int idPer) {
+        super(idPer, firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
         this.empId = empId;
         this.empNumber = empNumber;
         this.empPosition = empPosition;
@@ -33,7 +33,7 @@ public class Employee extends Person {
         this.photo = photo;
         this.consumer = new Consumer(conId, conName, pass, role);//conName, pass, role
     }
-    
+
     //CONSTRUCTOR FOR ADD
     public Employee(String empNumber, String empPosition, int empStatus, String photo,
             String conName, String pass, String role, String firstName, String lastName1, String lastName2,
