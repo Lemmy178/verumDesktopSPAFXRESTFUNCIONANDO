@@ -16,14 +16,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.verum.spa.gui.PanelBranch">
+
+<BorderPane fx:id="pnlBranch" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.verum.spa.gui.PanelBranch">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="457.0" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="tblList" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="branchIdColumn" prefWidth="75.0" text="Clave" />
+                  <TableColumn fx:id="branchNameColumn" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="branchAddressColumn" prefWidth="75.0" text="Direccion" />
+                  <TableColumn fx:id="latitudeColumn" prefWidth="75.0" text="Latitud" />
+                  <TableColumn fx:id="longitudeColumn" prefWidth="75.0" text="Longitud" />
+                  <TableColumn fx:id="branchStatusColumn" prefWidth="75.0" text="Estatus" />
                </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="398.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
@@ -44,7 +49,7 @@
       </AnchorPane>
    </center>
    <right>
-      <VBox prefHeight="500.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="1000.0">
                <children>
@@ -80,7 +85,8 @@
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
-                     </padding></HBox>
+                     </padding>
+                  </HBox>
                   <JFXTextField fx:id="txtName" focusColor="#009551" layoutX="25.0" layoutY="27.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
                   <JFXTextField fx:id="txtAddress" focusColor="#009551" labelFloat="true" layoutX="26.0" layoutY="123.0" prefHeight="25.0" prefWidth="179.0" promptText="Dirección" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
                   <JFXTextField fx:id="txtLatitude" focusColor="#009551" layoutX="26.0" layoutY="160.0" prefHeight="25.0" prefWidth="179.0" promptText="Latitud" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />

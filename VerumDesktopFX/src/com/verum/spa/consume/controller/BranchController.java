@@ -25,7 +25,7 @@ public class BranchController {
     private static Branch branch = new Branch();
     private static BranchConsumeREST braREST = new BranchConsumeREST();
     
-    public String addBranch(String branchName, String branchAddress, double latitude, double longitude, boolean branchStatus) {        
+    public String addBranch(String branchName, String branchAddress, double latitude, double longitude, boolean branchStatus){        
             branch.setBranchName(branchName);
             branch.setBranchAddress(branchAddress);
             branch.setLatitude(latitude);
@@ -51,19 +51,9 @@ public class BranchController {
         return braREST.logicalDeleteBranch(branch.getBranchId());
     }
 
-    public ArrayList<Branch> branchList() {
+    public ArrayList<Branch> branchList() throws Exception {
 
-        String serverResponse = braREST.listBranch();
-        
-        ArrayList<Branch> branchList = null;
-        
-        if(!serverResponse.equals("false")){
-            Gson gson = new Gson();
-            Type branchListType = new TypeToken<ArrayList<Branch>>(){}.getType();
-            branchList = gson.fromJson(serverResponse, branchListType);        
-        }        
-        
-        return branchList;
+        return braREST.listBranch();                       
         
     }
     
