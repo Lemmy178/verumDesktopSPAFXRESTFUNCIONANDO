@@ -33,18 +33,18 @@
             </TableView>
             <ImageView fitHeight="200.0" fitWidth="200.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
                <image>
-                  <Image url="@../../../../../resources/massage.png" />
+                  <Image url="@../../../../../resources/relax2.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
    </center>
    <right>
-      <VBox fx:id="vBox" prefHeight="500.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="500.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="293.0">
                <children>
-                  <HBox alignment="CENTER" layoutY="390.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <HBox fx:id="hBox" alignment="CENTER" layoutY="390.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <JFXButton id="btnSucces" fx:id="btnNew" accessibleText="NEW" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Nuevo" textFill="WHITE">
                            <HBox.margin>

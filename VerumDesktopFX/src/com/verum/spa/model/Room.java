@@ -8,24 +8,54 @@
  *===========================================================================*/
 package com.verum.spa.model;
 
-public class Room {
-    private int roomId;
-    private String roomName;
-    private String roomDesc;
-    private String photo;
-    private int roomStatus;
-    private int branchId;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public Room(int roomId, String roomName, String roomDesc, String photo, int roomStatus, int branchId) {
+public class Room {
+
+    @SerializedName("roomId")
+    @Expose
+    private int roomId;
+    
+    @SerializedName("roomName")
+    @Expose
+    private String roomName;
+    
+    @SerializedName("roomDesc")
+    @Expose
+    private String roomDesc;
+    
+    @SerializedName("photo")
+    @Expose
+    private String photo;
+    
+    @SerializedName("roomStatus")
+    @Expose
+    private int roomStatus;
+    
+    private Branch branch;
+
+    public Room() {
+        this.branch = new Branch();
+    }
+
+    //add
+    public Room(String roomName, String roomDesc, String photo, int roomStatus, Branch branch) {
+        this.roomName=roomName;
+        this.roomDesc=roomDesc;
+        this.photo=photo;
+        this.roomStatus=roomStatus;
+        this.branch = branch;
+    }
+
+    public Room(int roomId, String roomName, String roomDesc, String photo, int roomStatus, Branch branch) {
         this.roomId = roomId;
         this.roomName = roomName;
         this.roomDesc = roomDesc;
         this.photo = photo;
         this.roomStatus = roomStatus;
-        this.branchId = branchId;
+        this.branch = branch;
     }
-    
-    public Room(){}
 
     public int getRoomId() {
         return roomId;
@@ -67,13 +97,12 @@ public class Room {
         this.roomStatus = roomStatus;
     }
 
-    public int getBranchId() {
-        return branchId;
+    public Branch getBranch() {
+        return branch;
     }
 
-    public void setBranchId(int branchId) {
-        this.branchId = branchId;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
-    
-    
+
 }

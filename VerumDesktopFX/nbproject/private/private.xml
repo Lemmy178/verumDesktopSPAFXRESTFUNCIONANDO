@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/ruben/Desktop/EscritorioMOI/VerumDesktopFX/src/com/verum/spa/gui/fxml/panel_product.fxml</file>
+            <file>file:/home/ruben/Desktop/EscritorioMOI/VerumDesktopFX/src/com/verum/spa/gui/fxml/panel_customer.fxml</file>
+            <file>file:/home/ruben/Desktop/EscritorioMOI/VerumDesktopFX/src/com/verum/spa/gui/fxml/panel_employee.fxml</file>
+            <file>file:/home/ruben/Desktop/EscritorioMOI/VerumDesktopFX/src/com/verum/spa/gui/PanelEmployee.java</file>
+            <file>file:/home/ruben/Desktop/EscritorioMOI/VerumDesktopFX/src/com/verum/spa/gui/PanelCustomer.java</file>
+        </group>
     </open-files>
 </project-private>

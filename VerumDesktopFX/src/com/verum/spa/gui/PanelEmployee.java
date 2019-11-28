@@ -11,81 +11,83 @@
 package com.verum.spa.gui;
 
 import com.jfoenix.controls.JFXButton;
-import java.io.IOException;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+import com.verum.spa.model.Employee;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 
 public class PanelEmployee implements Initializable {
 
-    FXMLLoader fxml;
-    Stage window;
-    Scene scene;
+    @FXML
+    private TableView<Employee> tblEmployee;
 
     @FXML
-    private BorderPane empBorderPane;
-    @FXML
-    private JFXButton btnEmpAdd;
-    @FXML
-    private JFXButton btnEmpAdm;
-    @FXML
-    private JFXButton btnEmpList;
-    @FXML
-    private VBox vBox;
+    private TableColumn<Employee, Integer> columIdEmp;
 
-    Parent root = null;
+    @FXML
+    private TableColumn<Employee, String> columEmpName;
+
+    @FXML
+    private TableColumn<Employee, String> columEmpLastName1;
+
+    @FXML
+    private TableColumn<Employee, String> columEmpLastName2;
+
+    @FXML
+    private TableColumn<Employee, String> columEmpUserName;
+
+    @FXML
+    private ImageView imgVUser;
+
+    @FXML
+    private JFXTextField txtEmpPos;
+
+    @FXML
+    private JFXTextField txtEmpName;
+
+    @FXML
+    private JFXTextField txtEmpLastN1;
+
+    @FXML
+    private JFXTextField txtEmpLastN2;
+
+    @FXML
+    private JFXTextField txtRFC;
+
+    @FXML
+    private JFXTextField txtEmpPhone;
+
+    @FXML
+    private JFXTextField txtEmpAdd;
+
+    @FXML
+    private JFXComboBox<?> cmbGenre;
+
+    @FXML
+    private Label lblEmployeeNumber;
+
+    @FXML
+    private JFXButton btnNewEmployee;
+
+    @FXML
+    private JFXButton btnSaveEmployee;
+
+    @FXML
+    private JFXButton btnDeleteEmployee;
+
+    public PanelEmployee() {
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addListeners();
-        try {
-            windowDefault();
-        } catch (IOException ex) {
-            Logger.getLogger(PanelEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    public void addListeners() {
-        for (Node node : vBox.getChildren()) {
-            if (node.getAccessibleText() != null) {
-                node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
-                    switch (node.getAccessibleText()) {
-                        case "admEmployee":
-                            try {
-                                root = FXMLLoader.load(getClass().getResource("/com/verum/spa/gui/fxml/employee_Window_Modify.fxml"));
-                                empBorderPane.setCenter(root);
-                            } catch (IOException ex) {
-                                Logger.getLogger(WindowMain.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            break;
-                        case "listEmployee":
-                            try {
-                                root = FXMLLoader.load(getClass().getResource("/com/verum/spa/gui/fxml/employee_Window_List.fxml"));
-                                empBorderPane.setCenter(root);
-                            } catch (IOException ex) {
-                                Logger.getLogger(WindowMain.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            break;
-                    }
-                });
-            }
-        }
-    }
-
-    public void windowDefault() throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/verum/spa/gui/fxml/product_Window_Modify.fxml"));
-        empBorderPane.setCenter(root);
     }
 
 }

@@ -12,10 +12,6 @@ package com.verum.spa.consumeREST;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.verum.spa.model.Room;
 import java.io.BufferedReader;
@@ -25,57 +21,64 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collection;
+import java.util.ArrayList;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
+import static javax.ws.rs.client.Entity.entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class RoomConsumeREST {
 
+    static Response response = null;
     static Client client = ClientBuilder.newClient();
     static WebTarget target;
-    static String values = "";
     static GsonBuilder builder = new GsonBuilder();
     static Gson gson = builder.create();
-//    Product pro = new Product();
+    static int statusCode;
 
-    //ADD
-    public String addRoom(Room room) {
-        target = client.target("http://localhost:8080/VerumRESTSpa/api/roomR/addRoom");
-        values = target.request().post(Entity.entity(room, MediaType.APPLICATION_JSON), String.class);
-        return values;
+
+    public int addRoom(Room room) {
+        target = client.target("http://localhost:8080/VerumRESTSpa2/api/room/add");
+        response = target.queryParam("roomName", room.getRoomName()).
+                          queryParam("roomDesc", room.getRoomDesc()).
+                          queryParam("photo", room.getPhoto()).
+                          queryParam("branchId", room.getBranch().getBranchId()).
+                request(MediaType.APPLICATION_JSON).post(null);
+        statusCode = response.getStatus();
+        return statusCode;
     }
 
-    public String modifyRooom(Room room) {
-        target = client.target("http://localhost:8080/VerumRESTSpa/api/pruebas/modifyRoom");
-        values = target.request().put(Entity.entity(room, MediaType.APPLICATION_JSON), String.class);
-        return values;
+    public int modifyRooom(Room room) {
+        target = client.target("http://localhost:8080/VerumRESTSpa2/api/room/modify");
+        response = target.queryParam("roomName", room.getRoomName()).
+                          queryParam("roomDesc", room.getRoomDesc()).
+                          queryParam("photo", room.getPhoto()).
+                          queryParam("branchId", room.getBranch().getBranchId()).
+                          queryParam("roomStatus", room.getRoomStatus()).
+                          queryParam("roomId", room.getRoomId()).
+                request(MediaType.APPLICATION_JSON).put(entity(room, MediaType.APPLICATION_JSON));
+        statusCode = response.getStatus();
+        return statusCode;
+    }
+    
+    public int logicalDeleteRoom(Room room) {
+        target = client.target("http://localhost:8080/VerumRESTSpa2/api/room/logDelete");
+        response = target.queryParam("roomId", room.getRoomId()).request(MediaType.APPLICATION_JSON).put(entity(room, MediaType.APPLICATION_JSON));
+        statusCode = response.getStatus();
+        return statusCode;
     }
 
-    public String logicalDeleteRoom(Room room) {
-        target = client.target("http://localhost:8080/VerumRESTSpa/api/roomR/deleteRoom");
-        values = target.request().put(Entity.entity(room, MediaType.APPLICATION_JSON), String.class);
-        return values;
-    }
-
-    public JsonArray listRoom() throws MalformedURLException, IOException {
-        JsonParser parser = new JsonParser();
-        JsonElement tradeElement = null;
-        JsonObject json = null;
-        JsonArray jsonAr = null;
-
-        Gson g = new Gson();
-
-        String ruta = "http://localhost:8080/VerumRESTSpa/api/roomR/roomList";
+    public ArrayList listRoom() throws MalformedURLException, IOException {
+        String ruta = "http://localhost:8080/VerumRESTSpa2/api/room/roomList";
         URL url = new URL(ruta);
         HttpURLConnection connHttp = (HttpURLConnection) url.openConnection();
-        int respuestaServidor = 0;
-        InputStreamReader isr = null;
-        BufferedReader br = null;
-        String lineaActual = null;
-        String contenidoRespuesta = null;
+        int respuestaServidor;
+        InputStreamReader isr;
+        BufferedReader br;
+        String lineaActual;
+        String contenidoRespuesta;
 
         connHttp.setRequestMethod("GET");
         connHttp.setRequestProperty("dataType", "json");
@@ -91,28 +94,12 @@ public class RoomConsumeREST {
             br.close();
             connHttp.disconnect();
 
-            Type collectionType = new TypeToken<Collection<Room>>() {
+            Type collectionType = new TypeToken<ArrayList<Room>>() {
             }.getType();
-            Collection<Room> enums = gson.fromJson(contenidoRespuesta, collectionType);
-            enums.toString();
-
-            System.out.println(enums);
-            return null;
+            ArrayList<Room> roomCollection = gson.fromJson(contenidoRespuesta, collectionType);
+            return roomCollection;
         }
         return null;
     }
-
-    public void consultarPrecio() throws IOException {
-        /* double precio = 0;
-//        JsonObject json = listPro();
-        JsonObject jsonRates = null;
-
-        if (json != null) {
-            jsonRates = json.getAsJsonObject("0").getAsJsonObject();
-            precio = jsonRates.get("useCost").getAsDouble();
-        }
-        System.out.println(precio);
-//        return precio;*/
-
-    }
+    
 }

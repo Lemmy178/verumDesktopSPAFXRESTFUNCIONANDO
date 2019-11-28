@@ -11,16 +11,12 @@
 package com.verum.spa.consume.controller;
 
 import com.verum.spa.consumeREST.ProductConsumeREST;
-import com.verum.spa.consumeREST.RoomConsumeREST;
 import com.verum.spa.model.Product;
-import com.verum.spa.model.Room;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductController {
-
-    private RoomConsumeREST rest = new RoomConsumeREST();
-    private Room rom = new Room();
+    
     private static Product pro = new Product();
     private static ProductConsumeREST proREST = new ProductConsumeREST();
     private static int code;
@@ -37,6 +33,7 @@ public class ProductController {
         pro.setProdName(proName);
         pro.setBrand(brand);
         pro.setUseCost(useCost);
+        code = proREST.addProduct(pro);
         if (code != 200) {
             return "Error";
         } else {
