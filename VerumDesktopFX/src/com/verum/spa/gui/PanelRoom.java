@@ -8,65 +8,197 @@
  *===========================================================================*/
 package com.verum.spa.gui;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import com.verum.spa.consume.controller.BranchController;
+import com.verum.spa.consume.controller.RoomController;
+import com.verum.spa.model.Branch;
+import com.verum.spa.model.Room;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class PanelRoom implements Initializable {
-
-    FXMLLoader fxml;
-    Stage window;
-    Scene scene;
     
-    @FXML TextField txtName;
-    @FXML TextArea txaDescription;
-    @FXML ComboBox cmbStatus;
+    @FXML JFXTextField txtName;
+    @FXML JFXTextArea txaDescription;
+    @FXML JFXComboBox<String> cmbStatus;
+    @FXML JFXComboBox<String> cmbBranchName;
     
     @FXML ImageView imgvPhoto;
     
-    @FXML Button btnNew;
-    @FXML Button btnSave;
-    @FXML Button btnDelete;
+    @FXML JFXButton btnNew;
+    @FXML JFXButton btnSave;
+    @FXML JFXButton btnDelete;
     
-    @FXML VBox vBox;
+    @FXML TableView<Room> tblvRoomTable;
     
-    Parent root = null;
-
+    @FXML TableColumn<Room, Integer> tblcRoomId;
+    @FXML TableColumn<Room, String> tblcRoomName;
+    @FXML TableColumn<Room, String> tblcRoomDesc;
+    @FXML TableColumn<Room, String> tblcBranchName;
+    @FXML TableColumn<Room, Byte> tblcRoomStatus;
+    
+    
+    private ObservableList<Room> masterData = FXCollections.observableArrayList();
+    
+    private ArrayList<Room> roomData = new ArrayList<>();
+    
+    private Alert alert = new Alert(Alert.AlertType.NONE);
+    
+    public PanelRoom(){
+        addValues();
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        createTable();
+        addListeners();
     }
     
     public void addListeners() {
-        for (Node node : vBox.getChildren()) {
-            if (node.getAccessibleText() != null) {
-                node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
-                    switch (node.getAccessibleText()) {
-                        case "NEW":
-                            break;
-                        case "SAVE":
-                            break;
-                        case "DELETE":
-                            break;
-                    }
-                });
+        tblvRoomTable.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Room> observable, Room oldValue, Room room) -> {
+            if(room != null){
+                txtName.setText(room.getRoomName());
+                txaDescription.setText(room.getRoomDesc());
+                cmbBranchName.setValue(room.getBranch().getBranchName());
+                if(room.getRoomStatus() == 1){
+                    cmbStatus.setValue("Activo");
+                } else {
+                    cmbStatus.setValue("Inactivo");
+                }
+            } else {
+                txtName.setText("");
+                txaDescription.setText("");
+                cmbBranchName.setValue("");
+                cmbStatus.setValue("");
             }
-        }
+        });
+        
+        btnDelete.setOnAction(ev -> {
+            Room aux = tblvRoomTable.getSelectionModel().selectedItemProperty().get();
+            if(aux != null){
+                boolean resp = RoomController.logicalDeleteRoomController(aux.getRoomId());
+                if(resp) showAlert("Eliminación lógica exitosa", "Los datos se han eliminado correctamente", Alert.AlertType.INFORMATION);
+                else showAlert("Eliminación lógica no exitosa", "Ha ocurrido un error al intentar eliminar los datos", Alert.AlertType.ERROR);
+            } else {
+                showAlert("Selección invalida", "No se seleccionó una fila o la selección es inválida", Alert.AlertType.ERROR);
+            }
+        });
+        
+        btnNew.setOnAction(ev -> {
+            tblvRoomTable.getSelectionModel().clearSelection();
+        });
+        
+        btnSave.setOnAction(ev -> {
+            Room aux = tblvRoomTable.getSelectionModel().selectedItemProperty().get();
+            String name, desc, photo;
+            int roomId, status, branchId;
+            if(aux == null){
+                name = txtName.getText();
+                desc = txaDescription.getText();
+                photo = imgvPhoto.toString();
+                branchId = cmbBranchName.getSelectionModel().selectedIndexProperty().get();
+                branchId += 1;
+                if(RoomController.emptyFieldsValidation(name, desc, photo, branchId, branchId, branchId)){
+                    boolean resp = RoomController.addRoomController(name, desc, photo, branchId);
+                    if(resp) showAlert("Inserción exitosa", "Los datos se han guardado correctamente", Alert.AlertType.INFORMATION);
+                    else showAlert("Inserción no exitosa", "Ha ocurrido un error al intentar guardar los datos", Alert.AlertType.ERROR);
+                    
+                } else {
+                    showAlert("Campos invalidos", "Los campos ingresados no son correctos.", Alert.AlertType.ERROR);
+                }
+            } else {
+                name = txtName.getText();
+                desc = txaDescription.getText();
+                photo = imgvPhoto.toString();
+                roomId = aux.getRoomId();
+                status = cmbStatus.getSelectionModel().selectedIndexProperty().get();
+                status += 1;
+                branchId = cmbBranchName.getSelectionModel().selectedIndexProperty().get();
+                branchId += 1;
+                if(RoomController.emptyFieldsValidation(name, desc, photo, roomId, branchId, status)){
+                    boolean resp = RoomController.modifyRoomController(name, desc, photo, branchId,status, roomId);
+                    if(resp){
+                        showAlert("Actualización exitosa", "Los datos se han actualizado correctamente", Alert.AlertType.INFORMATION);
+                    } else {
+                        showAlert("Actualización no exitosa", "Ha ocurrido un error al intentar actualizar los datos", Alert.AlertType.ERROR);
+                    }
+                } else {
+                    showAlert("Campos invalidos", "Los campos ingresados no son correctos.", Alert.AlertType.ERROR);
+                }
+            }
+        });
+    } 
+    
+    public void addValues(){
+        Platform.runLater(() -> {
+            try{
+                roomData = RoomController.roomList();
+                initializeLogic();
+                if(roomData != null){
+                    roomData.forEach((room) -> {
+                        masterData.add(room);
+                    });
+                }
+            } catch(IOException e){
+                showAlert("Datos no encontrados", "No se han encontrado valores en la base de datos.", Alert.AlertType.ERROR);
+            }
+        });
     }
     
-
+    public void createTable(){
+        tblcRoomId.setCellValueFactory(new PropertyValueFactory<>("RoomId"));
+        tblcRoomName.setCellValueFactory(new PropertyValueFactory<>("RoomName"));
+        tblcRoomDesc.setCellValueFactory(new PropertyValueFactory<>("RoomDesc"));
+        tblcBranchName.setCellValueFactory((TableColumn.CellDataFeatures<Room, String> param) -> new SimpleStringProperty(param.getValue().getBranch().getBranchName()));
+        tblcRoomStatus.setCellValueFactory(new PropertyValueFactory<>("RoomStatus"));
+        tblvRoomTable.setItems(masterData);
+    }
     
+    public void initializeLogic() {
+        btnNew.setDisable(false);
+        btnDelete.setDisable(false);
+        btnSave.setDisable(false);
+        
+        BranchController branchCtrl = new BranchController();
+        ArrayList<Branch> branches = branchCtrl.branchList();
+        LinkedHashSet<String> uniqueBranch = new LinkedHashSet<>();
+        branches.forEach((branch) -> {
+            uniqueBranch.add(branch.getBranchName());
+        });
+        uniqueBranch.forEach((name) -> {
+            cmbBranchName.getItems().add(name);
+        });
+        
+        cmbStatus.getItems().add("Activo");
+        cmbStatus.getItems().add("Inactivo");
 
+        cmbStatus.setEditable(false);
+        cmbBranchName.setEditable(false);
+    }
+    
+    public void showAlert(String title, String content, Alert.AlertType alertType){
+        alert.setAlertType(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    
 }

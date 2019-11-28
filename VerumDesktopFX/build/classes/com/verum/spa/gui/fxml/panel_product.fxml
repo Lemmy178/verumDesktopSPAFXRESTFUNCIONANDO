@@ -48,11 +48,6 @@
                         <TableColumn fx:id="columnProductStatus" prefWidth="118.0" text="Estatus" />
                     </columns>
                 </TableView>
-                <ImageView fitHeight="200.0" fitWidth="200.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
-                    <image>
-                        <Image url="@../../../../../resources/cream2.png" />
-                    </image>
-                </ImageView>
             </children>
         </AnchorPane>
     </center>
@@ -61,6 +56,11 @@
             <children>
                 <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="293.0">
                     <children>
+                      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="60.0" layoutY="75.0" opacity="0.05" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="75.0">
+                          <image>
+                              <Image url="@../../../../../resources/cream2.png" />
+                          </image>
+                      </ImageView>
                         <JFXTextField fx:id="txtProdName" focusColor="#009551" labelFloat="true" layoutX="26.0" layoutY="75.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
                         <JFXTextField fx:id="txtProdPrice" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="127.0" prefHeight="25.0" prefWidth="179.0" promptText="Precio" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
                         <JFXComboBox fx:id="cmbEstatus" editable="true" focusColor="#009551" layoutX="25.0" layoutY="182.0" prefHeight="25.0" prefWidth="205.0" promptText="Estatus" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />

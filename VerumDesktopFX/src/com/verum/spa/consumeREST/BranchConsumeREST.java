@@ -30,7 +30,7 @@ public class BranchConsumeREST {
     //ADD
     public String addBranch(Branch branch) {
         target = client.
-                target("http://localhost:8080/verumSpaREST/api/branch/add");
+                target("http://localhost:8080/verumSpaREST2/api/branch/add");
         values = target.request()
                 .post(Entity.entity(branch, MediaType.APPLICATION_JSON),
                         String.class);
@@ -38,20 +38,20 @@ public class BranchConsumeREST {
     }
 
     public String modifyBranch(Branch branch) {        
-        target = client.target("http://localhost:8080/verumSpaREST/api/branch/updateBranch");
+        target = client.target("http://localhost:8080/verumSpaREST2/api/branch/updateBranch");
         values = target.request().put(Entity.entity(branch, MediaType.APPLICATION_JSON), String.class);
         return values;
     }
 
     public String logicalDeleteBranch(int id) {
-        target = client.target("http://localhost:8080/verumSpaREST/api/branch/logicalDelete?idPro="+id);
+        target = client.target("http://localhost:8080/verumSpaREST2/api/branch/logicalDelete?idPro="+id);
         values = target.request().put(Entity.entity(id, MediaType.APPLICATION_JSON), String.class);
         return values;
     }
 
     public String listBranch() {
         target = client.
-                target("http://localhost:8080/verumSpaREST/api/branch/branchList");
+                target("http://localhost:8080/VerumRESTSpa2/api/branch/branchList");
         values = target.request().get(String.class);
         return values;
     }
