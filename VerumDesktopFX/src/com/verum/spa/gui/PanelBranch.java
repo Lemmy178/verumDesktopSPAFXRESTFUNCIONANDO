@@ -6,14 +6,20 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.verum.spa.consume.controller.BranchController;
 import com.verum.spa.model.Branch;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,79 +31,60 @@ import javafx.stage.Stage;
  */
 public class PanelBranch implements Initializable{  
     
-    @FXML TableView<Branch> tblList;    
-    @FXML JFXTextField txtAddress;
-    @FXML JFXTextField txtLatitude;
-    @FXML JFXTextField txtLongitude;
-    @FXML JFXTextField txtName;
-    @FXML JFXComboBox cmbStatus;        
+    @FXML private TableView<Branch> tblList;    
+    @FXML private JFXTextField txtAddress;
+    @FXML private JFXTextField txtLatitude;
+    @FXML private JFXTextField txtLongitude;
+    @FXML private JFXTextField txtName;
+    @FXML private JFXComboBox cmbStatus;        
     
-    @FXML JFXButton btnAddBranch;
-    @FXML JFXButton btnSaveBranch;
-    @FXML JFXButton btnDeleteBranch;                
+    @FXML private JFXButton btnAddBranch;
+    @FXML private JFXButton btnSaveBranch;
+    @FXML private JFXButton btnDeleteBranch;                
 
-    TableColumn<Branch,Integer> branchIdColumn = new TableColumn<>("Clave"); 
-    TableColumn<Branch,String> branchNameColumn = new TableColumn<>("Nombre"); 
-    TableColumn<Branch,String> branchAddressColumn = new TableColumn<>("Dirección"); 
-    TableColumn<Branch,Double> latitudeColumn = new TableColumn<>("Latitud"); 
-    TableColumn<Branch,Double> longitudeColumn = new TableColumn<>("Longitud"); 
-    TableColumn<Branch,String> branchStatusColumn = new TableColumn<>("Estatus");                
+    @FXML private TableColumn<Branch, Integer> branchIdColumn;
+    @FXML private TableColumn<Branch, String> branchNameColumn;
+    @FXML private TableColumn<Branch, String> branchAddressColumn;
+    @FXML private TableColumn<Branch, Double> latitudeColumn;
+    @FXML private TableColumn<Branch, Double> longitudeColumn;
+    @FXML private TableColumn<Branch, String> branchStatusColumn;
     
-    FXMLLoader fxmll;
-    Stage window;
-    Scene scene;
-    
-    BranchController branchCtrl;
-
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);    
+    private BranchController branchCtrl;
     private Branch contextBranch;
+    FXMLLoader fxmll;
+    ObservableList<Branch> branchList = FXCollections.observableArrayList();        
+    
+    public PanelBranch() throws Exception{
+        addValues();
+    }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources){
+        branchCtrl = new BranchController();
         addListeners();
-        fillComboBoxes();        
+        fillComboBoxes();
         initializeColumns();
-        fillTableView();        
+        fillTableView();
     }
     
     private void addListeners(){                    
         
         btnAddBranch.setOnAction(evt -> {
             cleanFields();
-            if(contextBranch!=null){
-                if(contextBranch.getBranchId()!=-1){
-                    contextBranch = new Branch();
-                    contextBranch.setBranchId(-1);            
-                }            
-            }
-            
-            
-            
+            contextBranch = null;            
+            btnAddBranch.setDisable(true);
+            tblList.setDisable(true);
         });
         
-        btnSaveBranch.setOnAction(evt ->{
-            boolean active = false;
-            if(cmbStatus.getSelectionModel().getSelectedIndex()>-1){
-                active = cmbStatus.getSelectionModel().getSelectedIndex()==0;            
-            }            
-            if(contextBranch!=null){
-                if(contextBranch.getBranchId()!=-1){
-                    contextBranch.setBranchName(txtName.getText());
-                    contextBranch.setBranchAddress(txtAddress.getText());
-                    contextBranch.setLatitude(Double.parseDouble(txtLatitude.getText()));
-                    contextBranch.setLongitude(Double.parseDouble(txtLongitude.getText()));
-                    contextBranch.setBranchStatus(active);                                                       
-
-                    branchCtrl.addBranch(contextBranch.getBranchName(),
-                            contextBranch.getBranchAddress(),
-                            contextBranch.getLatitude(),
-                            contextBranch.getLongitude(),
-                            contextBranch.isBranchStatus());
-            
-                }            
-            }
-            fillTableView();
-            tblList.getSelectionModel().selectLast();
-            
+        btnSaveBranch.setOnAction((ActionEvent evt) ->{                        
+            if(cmbStatus.getSelectionModel().getSelectedIndex()>-1)                        
+                if(contextBranch!=null){                                   
+                    modifyBranch();
+                }else{                    
+                    addBranch();
+            }                                    
+            refreshList();                                            
         });        
         
         btnDeleteBranch.setOnAction(evt -> {
@@ -105,7 +92,7 @@ public class PanelBranch implements Initializable{
                 if(contextBranch.getBranchId()!=-1){
                     branchCtrl.logicalDelte(contextBranch.getBranchId());                
                 }
-            fillTableView();           
+            refreshList();
         });                       
         
         tblList.getSelectionModel().selectedItemProperty().addListener((obs,selection,newSelection) ->{
@@ -129,25 +116,32 @@ public class PanelBranch implements Initializable{
         cmbStatus.getItems().addAll("Activo","Inactivo");    
     }
     
-    /**
-     * 
-     *This method should be called after {@link #initializeColumns()} is called
-     * 
-    */    
     private void fillTableView(){                               
-        
-        tblList.setPlaceholder(new Label("No hay sucursales que mostrar"));
-        tblList.getColumns().addAll(branchIdColumn,branchNameColumn,branchAddressColumn,latitudeColumn,longitudeColumn,branchStatusColumn);        
-        
-        ArrayList<Branch> branchList = branchCtrl.branchList();  
-        
-        if(branchList!=null){
-            branchList.stream().forEach((branch) -> {
-                tblList.getItems().add(branch);
-            });                            
-        }
-
+        if(branchList!=null)
+            tblList.setItems(branchList);                        
     }
+    
+    private void addValues(){
+        Platform.runLater(() -> {
+            try {
+                ArrayList<Branch> dataBranch = branchCtrl.branchList();                                
+                branchList.clear();
+                if (dataBranch != null) {
+                    dataBranch.stream().forEach((branch) -> {
+                        branchList.add(branch);
+                    });
+                }
+            } catch (IOException ex) {
+                alert.setHeaderText("Error:");
+                alert.setContentText("Lista sucursales no disponible");
+                alert.showAndWait();
+            } catch (Exception ex) {
+                Logger.getLogger(PanelBranch.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });   
+    }
+    
+    
     @Deprecated
     private void enableFields(){        
         txtAddress.setDisable(false);
@@ -188,8 +182,38 @@ public class PanelBranch implements Initializable{
         branchNameColumn.setCellValueFactory(new PropertyValueFactory<>("branchName"));
         branchAddressColumn.setCellValueFactory(new PropertyValueFactory<>("branchAddress"));
         latitudeColumn.setCellValueFactory(new PropertyValueFactory<>("latitude"));
-        longitudeColumn.setCellValueFactory(new PropertyValueFactory<>("latitude"));
-        branchStatusColumn.setCellValueFactory(new PropertyValueFactory<>("latitude"));
+        longitudeColumn.setCellValueFactory(new PropertyValueFactory<>("longitude"));
+        branchStatusColumn.setCellValueFactory(new PropertyValueFactory<>("branchStatus"));
     }
     
+    private void refreshList(){        
+            addValues();            
+            fillTableView();                                                        
+    }        
+    
+    private void modifyBranch(){
+        branchCtrl.modifyBranch(contextBranch.getBranchId(),
+                                txtName.getText(),
+                                txtAddress.getText(),
+                                Double.parseDouble(txtLatitude.getText()),
+                                Double.parseDouble(txtLongitude.getText()),
+                                cmbStatus.getSelectionModel().getSelectedItem().equals("Activo"));                                            
+        tblList.setDisable(false);
+        btnAddBranch.setDisable(false);    
+    }
+ 
+    private void addBranch(){
+        contextBranch = new Branch(-1,txtName.getText(),
+                                txtAddress.getText(),
+                                Double.parseDouble(txtLatitude.getText()),
+                                Double.parseDouble(txtLongitude.getText()),
+                                cmbStatus.getSelectionModel().getSelectedItem().equals("Activo"));
+
+        branchCtrl.addBranch(contextBranch.getBranchName(),
+            contextBranch.getBranchAddress(),
+            contextBranch.getLatitude(),
+            contextBranch.getLongitude(),
+            contextBranch.isBranchStatus()); 
+    
+    }
 }
