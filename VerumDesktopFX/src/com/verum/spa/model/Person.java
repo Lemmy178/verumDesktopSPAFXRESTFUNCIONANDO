@@ -6,11 +6,11 @@
  |                
  | Deficiencies:  No detected.
  *===========================================================================*/
-
 package com.verum.spa.model;
 
 public abstract class Person {
 
+    private int idPer;
     private String firstName;
     private String lastName1;
     private String lastName2;
@@ -20,6 +20,17 @@ public abstract class Person {
     private String rfc;
 
     public Person() {
+    }
+
+    public Person(int idPer, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telepnohe, String rfc) {
+        this.idPer = idPer;
+        this.firstName = firstName;
+        this.lastName1 = lastName1;
+        this.lastName2 = lastName2;
+        this.gender = gender;
+        this.perAddress = perAddress;
+        this.telephone = telepnohe;
+        this.rfc = rfc;
     }
 
     public Person(String firstName, String lastName1, String lastName2, String gender, String perAddress, String telepnohe, String rfc) {
@@ -86,6 +97,14 @@ public abstract class Person {
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public int getIdPer() {
+        return idPer;
+    }
+
+    public void setIdPer(int idPer) {
+        this.idPer = idPer;
     }
 
 }

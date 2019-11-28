@@ -6,7 +6,6 @@
  |                
  | Deficiencies:  No detected.
  *===========================================================================*/
-
 package com.verum.spa.model;
 
 public class Customer extends Person {
@@ -18,20 +17,24 @@ public class Customer extends Person {
     private Consumer consumer;
 
     public Customer() {
-        this.consumer = new Consumer();
     }
+
     //CONSTRUCTOR FOR LIST
-    public Customer(int cusId, String uniqueNumber, String email, int cusStatus, int conId, String conName, String pass, String role, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telephone, String rfc) {
-        super(firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
+    public Customer(int cusId, String uniqueNumber, String email, int cusStatus, int conId,
+            String conName, String pass, String role, String firstName, String lastName1, String lastName2, String gender,
+            String perAddress, String telephone, String rfc, int idPer) {
+        super(idPer, firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
         this.cusId = cusId;
         this.uniqueNumber = uniqueNumber;
         this.email = email;
         this.cusStatus = cusStatus;
         this.consumer = new Consumer(conId, conName, pass, role);//conName, String pass, String role
     }
+
     //CONSTRUCTOR FOR ADD
-    public Customer(String uniqueNumber, String email, int cusStatus, String conName, String pass, String role, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telephone, String rfc) {
-        super(firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
+    public Customer(String uniqueNumber, String email, int cusStatus, String conName, String pass, String role, String firstName,
+            String lastName1, String lastName2, String gender, String perAddress, String telephone, String rfc, int idPer) {
+        super(idPer, firstName, lastName1, lastName2, gender, perAddress, telephone, rfc);
         this.uniqueNumber = uniqueNumber;
         this.email = email;
         this.cusStatus = cusStatus;

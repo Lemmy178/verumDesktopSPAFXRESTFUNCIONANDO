@@ -33,6 +33,7 @@ public class ProductController {
         pro.setProdName(proName);
         pro.setBrand(brand);
         pro.setUseCost(useCost);
+        code = proREST.addProduct(pro);
         if (code != 200) {
             return "Error";
         } else {
