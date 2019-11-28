@@ -116,11 +116,6 @@ public class PanelBranch implements Initializable{
         cmbStatus.getItems().addAll("Activo","Inactivo");    
     }
     
-    /**
-     * 
-     *This method should be called after {@link #initializeColumns()} is called
-     * 
-    */    
     private void fillTableView(){                               
         if(branchList!=null)
             tblList.setItems(branchList);                        

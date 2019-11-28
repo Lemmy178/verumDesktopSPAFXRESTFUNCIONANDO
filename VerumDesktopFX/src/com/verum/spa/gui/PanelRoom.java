@@ -21,6 +21,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -159,6 +161,8 @@ public class PanelRoom implements Initializable {
                 }
             } catch(IOException e){
                 showAlert("Datos no encontrados", "No se han encontrado valores en la base de datos.", Alert.AlertType.ERROR);
+            } catch (Exception ex) {
+                Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
@@ -172,7 +176,7 @@ public class PanelRoom implements Initializable {
         tblvRoomTable.setItems(masterData);
     }
     
-    public void initializeLogic() {
+    public void initializeLogic() throws Exception {
         btnNew.setDisable(false);
         btnDelete.setDisable(false);
         btnSave.setDisable(false);

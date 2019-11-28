@@ -1,0 +1,21 @@
+#addButton{
+    -fx-background-color: #00a65a;
+}
+#addButton:hover{
+    -fx-background-color: #009551;
+}
+
+#admButton{
+    -fx-background-color: #f39c12;
+}
+
+#admButton:hover{
+    -fx-background-color: #da8c10;
+}
+
+#listButton{
+    -fx-background-color: #605ca8;
+}
+#listButton:hover{
+    -fx-background-color: #565397;
+}
