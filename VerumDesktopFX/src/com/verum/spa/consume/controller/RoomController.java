@@ -44,7 +44,7 @@ public class RoomController {
         room.getBranch().setBranchId(branchId);
         room.setRoomStatus(roomStatus);
         room.setRoomId(roomId);
-        code = roomREST.modifyRooom(room);
+        code = roomREST.modifyRoom(room);
         return code == 200;
     }
     

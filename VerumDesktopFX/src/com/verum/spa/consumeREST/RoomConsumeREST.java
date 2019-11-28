@@ -50,7 +50,7 @@ public class RoomConsumeREST {
         return statusCode;
     }
 
-    public int modifyRooom(Room room) {
+    public int modifyRoom(Room room) {
         target = client.target("http://localhost:8080/VerumRESTSpa2/api/room/modify");
         response = target.queryParam("roomName", room.getRoomName()).
                           queryParam("roomDesc", room.getRoomDesc()).
@@ -94,8 +94,7 @@ public class RoomConsumeREST {
             br.close();
             connHttp.disconnect();
 
-            Type collectionType = new TypeToken<ArrayList<Room>>() {
-            }.getType();
+            Type collectionType = new TypeToken<ArrayList<Room>>() {}.getType();
             ArrayList<Room> roomCollection = gson.fromJson(contenidoRespuesta, collectionType);
             return roomCollection;
         }

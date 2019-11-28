@@ -8,12 +8,28 @@
  *===========================================================================*/
 package com.verum.spa.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Treatment {
+    
+    @SerializedName("treatId")
+    @Expose
     private int treatId;
+    @SerializedName("treatName")
+    @Expose
     private String treatName;
+    @SerializedName("treatDesc")
+    @Expose
     private String treatDesc;
-    private double cost; 
+    @SerializedName("cost")
+    @Expose
+    private double cost;
+    @SerializedName("treatStatus")
+    @Expose
     private int treatStatus;
+    
+    public Treatment(){}
 
     public Treatment(int treatId, String treatName, String treatDesc, double cost, int treatStatus) {
         this.treatId = treatId;
@@ -62,7 +78,5 @@ public class Treatment {
     public void setTreatStatus(int treatStatus) {
         this.treatStatus = treatStatus;
     }
-    
-    
-    
+
 }

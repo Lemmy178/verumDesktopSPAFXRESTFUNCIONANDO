@@ -27,15 +27,16 @@
             </Label>
             <TableView fx:id="tblvTreatTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0">
                <columns>
-                  <TableColumn fx:id="tblcColumn1" prefWidth="75.0" text="C1" />
-                  <TableColumn fx:id="tblcColumn2" prefWidth="75.0" text="C2" />
+                  <TableColumn maxWidth="1000.0" prefWidth="75.0" text="ID" />
+                  <TableColumn maxWidth="2500.0" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="tblcColumn1" prefWidth="75.0" text="Descripción" />
+                  <TableColumn fx:id="tblcColumn2" maxWidth="2000.0" prefWidth="75.0" text="Costo" />
+                  <TableColumn maxWidth="2500.0" prefWidth="75.0" text="Estatus" />
                </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
-            <ImageView fitHeight="200.0" fitWidth="200.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
-               <image>
-                  <Image url="@../../../../../resources/relax2.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
    </center>
@@ -44,6 +45,11 @@
          <children>
             <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="293.0">
                <children>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="60.0" layoutY="71.0" opacity="0.05" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="71.0">
+                     <image>
+                        <Image url="@../../../../../resources/relax2.png" />
+                     </image>
+                  </ImageView>
                   <HBox fx:id="hBox" alignment="CENTER" layoutY="390.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
                         <JFXButton id="btnSucces" fx:id="btnNew" accessibleText="NEW" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Nuevo" textFill="WHITE">
@@ -81,10 +87,10 @@
                         </JFXButton>
                      </children>
                   </HBox>
-                  <JFXTextField fx:id="txtName" focusColor="#009551" layoutX="25.0" layoutY="36.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-                  <JFXTextField fx:id="txtCost" focusColor="#009551" layoutX="25.0" layoutY="85.0" promptText="Costo" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-                  <JFXComboBox fx:id="cmbStatus" editable="true" focusColor="#009551" layoutX="25.0" layoutY="138.0" prefHeight="25.0" prefWidth="205.0" promptText="Estatus" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-                  <JFXTextArea fx:id="txaDescription" focusColor="#009551" layoutX="25.0" layoutY="190.0" prefHeight="87.0" prefWidth="243.0" promptText="Descripción" unFocusColor="#00a65a" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXTextField fx:id="txtName" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="26.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="26.0" />
+                  <JFXTextField fx:id="txtCost" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="201.0" promptText="Costo" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="201.0" />
+                  <JFXComboBox fx:id="cmbStatus" editable="true" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="256.0" prefHeight="25.0" prefWidth="205.0" promptText="Estatus" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="256.0" />
+                  <JFXTextArea fx:id="txaDescription" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="80.0" prefHeight="101.0" prefWidth="270.0" promptText="Descripción" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
                </children>
             </AnchorPane>
          </children>

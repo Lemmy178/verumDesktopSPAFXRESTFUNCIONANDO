@@ -16,8 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
 
 public class PanelTreatment implements Initializable {
 
@@ -29,8 +27,6 @@ public class PanelTreatment implements Initializable {
     @FXML JFXButton btnNew;
     @FXML JFXButton btnSave;
     @FXML JFXButton btnDelete;
-    
-    @FXML HBox hBox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,20 +34,7 @@ public class PanelTreatment implements Initializable {
     }
 
     public void addListeners() {
-        for (Node node : hBox.getChildren()) {
-            if (node.getAccessibleText() != null) {
-                node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
-                    switch (node.getAccessibleText()) {
-                        case "add":
-                            break;
-                        case "update":
-                            break;
-                        case "delete":
-                            break;
-                    }
-                });
-            }
-        }
+        
     }
 
 
