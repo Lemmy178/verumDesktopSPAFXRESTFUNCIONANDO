@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import static javax.ws.rs.client.Entity.entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -54,7 +55,7 @@ public class TreatmentConsumeREST {
                           queryParam("cost", treat.getCost()).
                           queryParam("treatStatus", treat.getTreatStatus()).
                           queryParam("treatId", treat.getTreatId()).
-                request(MediaType.APPLICATION_JSON).post(null);
+                request(MediaType.APPLICATION_JSON).put(entity(treat, MediaType.APPLICATION_JSON));
         statusCode = response.getStatus();
         return statusCode;
     }
@@ -62,7 +63,7 @@ public class TreatmentConsumeREST {
     public int logicalDeleteTreatment(Treatment treat) {
         target = client.target("http://localhost:8080/VerumRESTSpa2/api/treatment/logDelete");
         response = target.queryParam("treatId", treat.getTreatId()).
-                request(MediaType.APPLICATION_JSON).post(null);
+                request(MediaType.APPLICATION_JSON).put(entity(treat, MediaType.APPLICATION_JSON));
         statusCode = response.getStatus();
         return statusCode;
     }

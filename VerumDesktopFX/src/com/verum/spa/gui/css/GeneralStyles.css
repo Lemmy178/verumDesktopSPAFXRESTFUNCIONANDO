@@ -25,10 +25,8 @@ info-color
 info-color-dark
 #0099CC
 */
-#nav{    
-    
+#nav{
     -fx-background-color:  linear-gradient(to left, #0092a1, #00b37e, #35D635);
-    
 }
 
 #btnAdm{
@@ -141,4 +139,16 @@ info-color-dark
 
 #deleteButton{
     -fx-background-color: #ff4444;    
+}
+
+#deleteButton:hover{
+    -fx-background-color: #CC0000;    
+}
+
+#updateButton{
+    -fx-background-color: #c500f9;    
+}
+
+#updateButton:hover{
+    -fx-background-color: #9F00CC;    
 }

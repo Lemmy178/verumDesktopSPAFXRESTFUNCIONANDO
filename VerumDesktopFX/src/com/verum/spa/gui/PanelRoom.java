@@ -48,6 +48,7 @@ public class PanelRoom implements Initializable {
     @FXML JFXButton btnNew;
     @FXML JFXButton btnSave;
     @FXML JFXButton btnDelete;
+    @FXML JFXButton btnUpdate;
     
     @FXML TableView<Room> tblvRoomTable;
     
@@ -70,6 +71,7 @@ public class PanelRoom implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeLogic();
         createTable();
         addListeners();
     }
@@ -147,13 +149,16 @@ public class PanelRoom implements Initializable {
                 }
             }
         });
+        
+        btnUpdate.setOnAction(ev -> {
+            updateTable();
+        });
     } 
     
     public void addValues(){
         Platform.runLater(() -> {
             try{
                 roomData = RoomController.roomList();
-                initializeLogic();
                 if(roomData != null){
                     roomData.forEach((room) -> {
                         masterData.add(room);
@@ -176,20 +181,25 @@ public class PanelRoom implements Initializable {
         tblvRoomTable.setItems(masterData);
     }
     
-    public void initializeLogic() throws Exception {
+    public void initializeLogic() {
         btnNew.setDisable(false);
         btnDelete.setDisable(false);
         btnSave.setDisable(false);
         
         BranchController branchCtrl = new BranchController();
-        ArrayList<Branch> branches = branchCtrl.branchList();
-        LinkedHashSet<String> uniqueBranch = new LinkedHashSet<>();
-        branches.forEach((branch) -> {
-            uniqueBranch.add(branch.getBranchName());
-        });
-        uniqueBranch.forEach((name) -> {
-            cmbBranchName.getItems().add(name);
-        });
+        ArrayList<Branch> branches;
+        try {
+            branches = branchCtrl.branchList();
+            LinkedHashSet<String> uniqueBranch = new LinkedHashSet<>();
+            branches.forEach((branch) -> {
+                uniqueBranch.add(branch.getBranchName());
+            });
+            uniqueBranch.forEach((name) -> {
+                cmbBranchName.getItems().add(name);
+            });
+        } catch (Exception ex) {
+            showAlert("Error en cargar lista", "La lista de las sucursales no se cargó adecuadamente", Alert.AlertType.ERROR);
+        }
         
         cmbStatus.getItems().add("Activo");
         cmbStatus.getItems().add("Inactivo");
@@ -203,6 +213,12 @@ public class PanelRoom implements Initializable {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    
+    public void updateTable(){
+        tblvRoomTable.getItems().clear();
+        addValues();
+        createTable();
     }
     
 }
