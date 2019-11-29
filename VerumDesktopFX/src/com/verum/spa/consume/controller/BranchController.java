@@ -25,7 +25,7 @@ public class BranchController {
     private static Branch branch = new Branch();
     private static BranchConsumeREST braREST = new BranchConsumeREST();
     
-    public String addBranch(String branchName, String branchAddress, double latitude, double longitude, boolean branchStatus){        
+    public String addBranch(String branchName, String branchAddress, double latitude, double longitude, int branchStatus){        
             branch.setBranchName(branchName);
             branch.setBranchAddress(branchAddress);
             branch.setLatitude(latitude);
@@ -35,7 +35,7 @@ public class BranchController {
     }
     
 
-    public String modifyBranch(int branchId, String branchName, String branchAddress, double latitude, double longitude, boolean branchStatus) {        
+    public String modifyBranch(int branchId, String branchName, String branchAddress, double latitude, double longitude, int branchStatus) {        
             branch.setBranchId(branchId);
             branch.setBranchName(branchName);
             branch.setBranchAddress(branchAddress);

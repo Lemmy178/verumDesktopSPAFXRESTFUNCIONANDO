@@ -44,7 +44,7 @@ public class BranchConsumeREST {
                 queryParam("branchAddress",branch.getBranchAddress()).
                 queryParam("latitude",branch.getLatitude()).
                 queryParam("longitude",branch.getLongitude()).
-                queryParam("branchStatus",branch.isBranchStatus()==true?"1":"2").
+                queryParam("branchStatus",branch.getBranchStatus()==1?"1":"2").
                 request()
                 .post(Entity.entity(branch, MediaType.APPLICATION_JSON),
                         String.class);
@@ -58,7 +58,7 @@ public class BranchConsumeREST {
                 queryParam("branchAddress",branch.getBranchAddress()).
                 queryParam("latitude",branch.getLatitude()).
                 queryParam("longitude",branch.getLongitude()).
-                queryParam("branchStatus",branch.isBranchStatus()==true?"1":"2").
+                queryParam("branchStatus",branch.getBranchStatus()==1?"1":"2").
                 request().put(Entity.entity(branch, MediaType.APPLICATION_JSON), String.class);
         return values;
     }
@@ -93,8 +93,8 @@ public class BranchConsumeREST {
             br.close();
             connHttp.disconnect();
 
-            Type collectionType = new TypeToken<ArrayList<Branch>>() {
-            }.getType();
+            Type collectionType = new TypeToken<ArrayList<Branch>>() {}.getType();
+            
             ArrayList<Branch> branchCollection = gson.fromJson(contenidoRespuesta, collectionType);
             return branchCollection;
         }
