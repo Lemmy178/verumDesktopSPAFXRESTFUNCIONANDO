@@ -15,12 +15,12 @@ public class Branch {
     private String branchAddress;
     private double latitude;    
     private double longitude;
-    private boolean branchStatus;    
+    private int branchStatus;    
 
     public Branch() {
     }
 
-    public Branch(int branchId, String branchName, String branchAddress, double latitude, double longitude, boolean branchStatus) {
+    public Branch(int branchId, String branchName, String branchAddress, double latitude, double longitude, int branchStatus) {
         this.branchId = branchId;
         this.branchName = branchName;
         this.branchAddress = branchAddress;
@@ -69,11 +69,11 @@ public class Branch {
         this.longitude = longitude;
     }
 
-    public boolean isBranchStatus() {
+    public int getBranchStatus() {
         return branchStatus;
     }
 
-    public void setBranchStatus(boolean branchStatus) {
+    public void setBranchStatus(int branchStatus) {
         this.branchStatus = branchStatus;
     }
     
