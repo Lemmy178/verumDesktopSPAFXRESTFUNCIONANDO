@@ -32,7 +32,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXCheckBox fx:id="chkListInactives" text="Listar inactivos" />
+                  <JFXCheckBox fx:id="chkListUnavailables" text="Listar inactivos" />
                </children>
             </HBox>
             <Label alignment="CENTER" prefHeight="43.0" prefWidth="362.0" text="Lista de Salas" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">

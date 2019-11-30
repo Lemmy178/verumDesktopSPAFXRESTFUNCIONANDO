@@ -9,6 +9,7 @@
 package com.verum.spa.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -42,6 +43,7 @@ public class PanelRoom implements Initializable {
     @FXML JFXTextArea txaDescription;
     @FXML JFXComboBox<String> cmbStatus;
     @FXML JFXComboBox<String> cmbBranchName;
+    @FXML JFXCheckBox chkListUnavailables;
     
     @FXML ImageView imgvPhoto;
     
@@ -161,7 +163,15 @@ public class PanelRoom implements Initializable {
                 roomData = RoomController.roomList();
                 if(roomData != null){
                     roomData.forEach((room) -> {
-                        masterData.add(room);
+                        if(chkListUnavailables.selectedProperty().get()){
+                            if(room.getRoomStatus()!= 1){
+                                masterData.add(room);
+                            }
+                        } else {
+                            if(room.getRoomStatus()== 1){
+                                masterData.add(room);
+                            }
+                        }
                     });
                 }
             } catch(IOException e){

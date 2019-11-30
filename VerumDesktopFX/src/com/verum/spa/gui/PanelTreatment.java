@@ -9,6 +9,7 @@
 package com.verum.spa.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -37,6 +38,7 @@ public class PanelTreatment implements Initializable {
     @FXML JFXTextField txtCost;
     @FXML JFXComboBox<String> cmbStatus;
     @FXML JFXTextArea txaDescription;
+    @FXML JFXCheckBox chkListUnavailables;
     
     @FXML JFXButton btnNew;
     @FXML JFXButton btnSave;
@@ -142,6 +144,7 @@ public class PanelTreatment implements Initializable {
                 }
             } catch(NumberFormatException e){
                 showAlert("Campo de costo inválido", "El campo del costo solo puede poseer números", Alert.AlertType.ERROR);
+                e.printStackTrace();
             }
         });
         
@@ -156,13 +159,23 @@ public class PanelTreatment implements Initializable {
                 treatmentData = TreatmentController.treatmentList();
                 if(treatmentData != null){
                     treatmentData.forEach((treatment) -> {
-                        masterData.add(treatment);
+                        if(chkListUnavailables.selectedProperty().get()){
+                            if(treatment.getTreatStatus() != 1){
+                                masterData.add(treatment);
+                            }
+                        } else {
+                            if(treatment.getTreatStatus() == 1){
+                                masterData.add(treatment);
+                            }
+                        }
                     });
                 }
             } catch(IOException e){
                 showAlert("Datos no encontrados", "No se han encontrado valores en la base de datos.", Alert.AlertType.ERROR);
+                e.printStackTrace();
             } catch (Exception ex) {
                 Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         });
     }

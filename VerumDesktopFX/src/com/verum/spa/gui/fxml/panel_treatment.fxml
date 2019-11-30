@@ -49,7 +49,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXCheckBox fx:id="chkListInactives" text="Listar inactivos" />
+                  <JFXCheckBox fx:id="chkListUnavailables" text="Listar inactivos" />
                </children>
             </HBox>
          </children>
