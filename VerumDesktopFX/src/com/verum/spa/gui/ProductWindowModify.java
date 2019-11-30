@@ -37,46 +37,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ProductWindowModify implements Initializable {
 
-    @FXML
-    private JFXButton btnUpdate;
-
-    @FXML
-    private CheckBox checkUnable;
-    @FXML
-    private JFXTextField txtProdName;
-    @FXML
-    private JFXTextField txtProdPrice;
-
-    @FXML
-    private JFXButton btnNew;
-
-    @FXML
-    private JFXButton btnSave;
-
-    @FXML
-    private JFXButton btnDelete;
-
-    @FXML
-    private JFXComboBox<String> cmbBrand;
-    @FXML
-    private JFXComboBox<String> cmbEstatus;
-    @FXML
-    private TableView<Product> tblProduct;
-    @FXML
-    private TableColumn<Product, Integer> columnProductID;
-    @FXML
-    private TableColumn<Product, String> columnProductName;
-    @FXML
-    private TableColumn<Product, String> columnProductBrand;
-    @FXML
-    private TableColumn<Product, Double> columnProductPrice;
-    @FXML
-    private TableColumn<Product, Integer> columnProductStatus;
-
+    @FXML private JFXButton btnUpdate;
+    @FXML private CheckBox checkUnable;
+    @FXML private JFXTextField txtProdName;
+    @FXML private JFXTextField txtProdPrice;
+    @FXML private JFXButton btnNew;
+    @FXML private JFXButton btnSave;
+    @FXML private JFXButton btnDelete;
+    @FXML private JFXComboBox<String> cmbBrand;
+    @FXML private JFXComboBox<String> cmbEstatus;
+    @FXML private TableView<Product> tblProduct;
+    @FXML private TableColumn<Product, Integer> columnProductID;
+    @FXML private TableColumn<Product, String> columnProductName;
+    @FXML private TableColumn<Product, String> columnProductBrand;
+    @FXML private TableColumn<Product, Double> columnProductPrice;
+    @FXML private TableColumn<Product, Integer> columnProductStatus;
     private ProductController proCtrl = new ProductController();
-
     private ObservableList<Product> masterData = FXCollections.observableArrayList();
-
     private ArrayList<Product> productData = new ArrayList<>();
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -92,9 +69,7 @@ public class ProductWindowModify implements Initializable {
 
     }
 
-    /* <------------------------LISTENERS---------------------------------------------------------------------->*/
     public void addingListeners() {
-        //Accept Button 
         btnNew.setOnAction((event) -> {
             try {
                 String prodName = txtProdName.getText().trim();
@@ -169,11 +144,11 @@ public class ProductWindowModify implements Initializable {
         });
 
         btnUpdate.setOnAction((event) -> {
-            addValues();
-            creatingTables();
+            Platform.runLater(() -> {
+                updateTable();
+            });
         });
 
-//        Selected Item
         tblProduct.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Product>() {
             @Override
             public void changed(ObservableValue<? extends Product> observable, Product oldValue, Product product) {
@@ -193,7 +168,6 @@ public class ProductWindowModify implements Initializable {
 
     }
 
-    /* <------------------------VALIDATIONS---------------------------------------------------------------------->*/
     public void validations() {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Campo vacio");
@@ -220,7 +194,6 @@ public class ProductWindowModify implements Initializable {
         });
     }
 
-    /* <------------------------ADDING VALUES---------------------------------------------------------------------->*/
     public void addValues() {
         Platform.runLater(() -> {
             try {
@@ -240,7 +213,6 @@ public class ProductWindowModify implements Initializable {
 
     }
 
-    /* <------------------------ADDING CELL VALUES---------------------------------------------------------------------->*/
     public void creatingTables() {
         columnProductID.setCellValueFactory(new PropertyValueFactory<Product, Integer>("ProdId"));
         columnProductName.setCellValueFactory(new PropertyValueFactory<Product, String>("ProdName"));
@@ -271,4 +243,9 @@ public class ProductWindowModify implements Initializable {
         cmbEstatus.setEditable(false);
     }
 
+    public void updateTable() {
+        tblProduct.getItems().clear();
+        addValues();
+        creatingTables();
+    }
 }
