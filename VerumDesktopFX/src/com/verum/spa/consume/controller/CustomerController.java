@@ -15,7 +15,7 @@ public class CustomerController {
     private static int code;
 
     public static boolean emptyFieldsValidation(String name, String lastName1, String lastName2, String rfc,
-            String tel, String adress, String genre, String email, String pass) {
+            String tel, String adress, String genre, String email, String pass, String conName, String charge) {
         if (name.trim().length() > 0 && name.trim().length() <= 64
                 || lastName1.trim().length() > 0 && lastName1.trim().length() <= 64
                 || lastName2.trim().length() > 0 && lastName2.trim().length() <= 64
@@ -24,7 +24,9 @@ public class CustomerController {
                 || tel.trim().length() > 0 && tel.trim().length() <= 25
                 || email.trim().length() > 0 && email.trim().length() <= 200
                 || pass.trim().length() > 0 && pass.trim().length() <= 48
-                || genre.trim().length() > 0 && genre.trim().length() <= 2) {
+                || genre.trim().length() > 0 && genre.trim().length() <= 2
+                || charge.trim().length() > 0 && charge.trim().length() <= 24
+                || conName.trim().length() > 0 && conName.trim().length() <= 48) {
             return true;
         }
         return false;

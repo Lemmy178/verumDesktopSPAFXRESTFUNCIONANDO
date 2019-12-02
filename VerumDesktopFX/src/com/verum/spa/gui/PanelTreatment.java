@@ -92,6 +92,7 @@ public class PanelTreatment implements Initializable {
                 txaDescription.setText(treatment.getTreatDesc());
                 txtCost.setText(String.valueOf(treatment.getCost()));
                 if (treatment.getTreatStatus() == 1) {
+
                     cmbStatus.setValue("Activo");
                 } else {
                     cmbStatus.setValue("Inactivo");
@@ -113,6 +114,7 @@ public class PanelTreatment implements Initializable {
                 } else {
                     showAlert("Eliminación lógica no exitosa", "Ha ocurrido un error al intentar eliminar los datos", Alert.AlertType.ERROR);
                 }
+
             } else {
                 showAlert("Selección invalida", "No se seleccionó una fila o la selección es inválida", Alert.AlertType.ERROR);
             }
@@ -139,7 +141,6 @@ public class PanelTreatment implements Initializable {
                         } else {
                             showAlert("Inserción no exitosa", "Ha ocurrido un error al intentar guardar los datos", Alert.AlertType.ERROR);
                         }
-
                     } else {
                         showAlert("Campos invalidos", "Los campos ingresados no son correctos.", Alert.AlertType.ERROR);
                     }
@@ -162,6 +163,7 @@ public class PanelTreatment implements Initializable {
                     }
                 }
             } catch (NumberFormatException e) {
+
                 showAlert("Campo de costo inválido", "El campo del costo solo puede poseer números", Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
@@ -182,6 +184,7 @@ public class PanelTreatment implements Initializable {
                     });
                 }
             } catch (IOException e) {
+
                 showAlert("Datos no encontrados", "No se han encontrado valores en la base de datos.", Alert.AlertType.ERROR);
                 e.printStackTrace();
             } catch (Exception ex) {
@@ -192,6 +195,7 @@ public class PanelTreatment implements Initializable {
     }
 
     public void createTable() {
+
         tblcTreatmentId.setCellValueFactory(new PropertyValueFactory<>("TreatId"));
         tblcTreatmentName.setCellValueFactory(new PropertyValueFactory<>("TreatName"));
         tblcTreatmentDesc.setCellValueFactory(new PropertyValueFactory<>("TreatDesc"));
@@ -210,6 +214,7 @@ public class PanelTreatment implements Initializable {
     }
 
     public void showAlert(String title, String content, Alert.AlertType alertType) {
+
         alert.setAlertType(alertType);
         alert.setTitle(title);
         alert.setContentText(content);
@@ -217,6 +222,7 @@ public class PanelTreatment implements Initializable {
     }
 
     public void updateTable() {
+
         tblvTreatmentTable.getItems().clear();
         addValues();
         createTable();
