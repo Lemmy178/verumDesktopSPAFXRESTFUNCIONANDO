@@ -1,9 +1,12 @@
 package com.verum.spa.consume.controller;
 
 import com.verum.spa.consumeREST.CustomerConsumeREST;
+import com.verum.spa.model.Consumer;
 import com.verum.spa.model.Customer;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CustomerController {
 
@@ -28,29 +31,35 @@ public class CustomerController {
     }
 
     public static String addCustomerController(String name, String lastName1, String lastName2, String rfc,
-            String tel, String adress, String genre, String email, String pass) {
+            String tel, String adress, String gender, String email, String passw, String conName, String charge) {
+        Consumer consumer = new Consumer();
         cus.setFirstName(name);
         cus.setLastName1(lastName1);
         cus.setLastName2(lastName2);
         cus.setRfc(rfc);
+        cus.setUniqueNumber(generateUniqueNumber(rfc));
         cus.setTelephone(tel);
         cus.setPerAddress(adress);
-        cus.setGender(genre);
+        cus.setGender(gender);
         cus.setEmail(email);
-        cus.getConsumer().setPass(pass);
+        cus.setCusStatus(1);
+        consumer.setConName(conName);
+        consumer.setRole(charge);
+        consumer.setPass(passw);
+        cus.setConsumer(consumer);
         code = cusRest.addCustomer(cus);
         if (code != 200) {
             return "Error";
         } else {
-            return "Producto agregado.";
+            return "Cliente agregado.";
         }
     }
 
     public static String modifyCustomerController(
             String name, String lastName1, String lastName2, String rfc,
-            String tel, String adress, String genre, String email,
-            int cusStatus, String charge,
-            int cusId, int conId, int perId) {
+            String tel, String adress, String genre, String email, String pass, String charge,
+            int cusStatus, int cusId, int conId, int perId) {
+        Consumer consumer = new Consumer();
         cus.setFirstName(name);
         cus.setLastName1(lastName1);
         cus.setLastName2(lastName2);
@@ -60,31 +69,40 @@ public class CustomerController {
         cus.setGender(genre);
         cus.setEmail(email);
         cus.setCusStatus(cusStatus);
-        cus.getConsumer().setRole(charge);
+        consumer.setConId(conId);
+        consumer.setPass(pass);
+        consumer.setRole(charge);
+        cus.setConsumer(consumer);
         cus.setCusId(cusId);
-        cus.getConsumer().setConId(conId);
-        cus.setIdPer(perId);
+        cus.setPerId(perId);
         code = cusRest.modifyCustomer(cus);
         if (code != 200) {
             return "Error";
         } else {
-            return "Producto modificado.";
+            return "Cliente modificado.";
         }
     }
 
     public static String logicalDelteCustomer(int cusId) {
-        cus.setIdPer(code);
+        cus.setPerId(code);
         code = cusRest.logicalDeleteCustomer(cus);
         if (code != 200) {
             return "Error";
         } else {
-            return "Producto eliminado.";
+            return "Cliente eliminado.";
         }
     }
 
-    public ArrayList<Customer> CustomerList() throws IOException {
+    public ArrayList<Customer> customerList() throws IOException {
         ArrayList<Customer> datosCustomer = new ArrayList<>();
         datosCustomer = cusRest.listCustomer();
         return datosCustomer;
+    }
+
+    public static String generateUniqueNumber(String rfc) {
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
+        Date now = new Date();
+        String unique = rfc.substring(0, 4) + sdf.format(now);
+        return unique.toUpperCase();
     }
 }

@@ -8,22 +8,41 @@
  *===========================================================================*/
 package com.verum.spa.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public abstract class Person {
 
-    private int idPer;
+    @SerializedName("perId")
+    @Expose
+    private int perId;
+    @SerializedName("firstName")
+    @Expose
     private String firstName;
+    @SerializedName("lastName1")
+    @Expose
     private String lastName1;
+    @SerializedName("lastName2")
+    @Expose
     private String lastName2;
+    @SerializedName("gender")
+    @Expose
     private String gender;
+    @SerializedName("perAddress")
+    @Expose
     private String perAddress;
+    @SerializedName("telephone")
+    @Expose
     private String telephone;
+    @SerializedName("rfc")
+    @Expose
     private String rfc;
 
     public Person() {
     }
 
-    public Person(int idPer, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telepnohe, String rfc) {
-        this.idPer = idPer;
+    public Person(int perId, String firstName, String lastName1, String lastName2, String gender, String perAddress, String telepnohe, String rfc) {
+        this.perId = perId;
         this.firstName = firstName;
         this.lastName1 = lastName1;
         this.lastName2 = lastName2;
@@ -99,12 +118,12 @@ public abstract class Person {
         this.rfc = rfc;
     }
 
-    public int getIdPer() {
-        return idPer;
+    public int getPerId() {
+        return perId;
     }
 
-    public void setIdPer(int idPer) {
-        this.idPer = idPer;
+    public void setPerId(int perId) {
+        this.perId = perId;
     }
 
 }

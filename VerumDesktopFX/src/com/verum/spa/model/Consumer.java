@@ -8,11 +8,21 @@
  *===========================================================================*/
 package com.verum.spa.model;
 
-public class Consumer {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Consumer {
+    @SerializedName("conId")
+    @Expose
     private int conId;
+    @SerializedName("conName")
+    @Expose
     private String conName;
+    @SerializedName("pass")
+    @Expose
     private String pass;
+    @SerializedName("role")
+    @Expose
     private String role;
 
     public Consumer() {

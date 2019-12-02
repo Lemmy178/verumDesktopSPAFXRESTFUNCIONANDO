@@ -4,12 +4,14 @@ import com.verum.spa.consumeREST.EmployeeConsumeREST;
 import com.verum.spa.model.Consumer;
 import com.verum.spa.model.Employee;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EmployeeController {
 
     private static Employee emp = new Employee();
-    private static Consumer consumer = new Consumer();
+    //private static Consumer consumer = new Consumer();
     private static EmployeeConsumeREST empRest = new EmployeeConsumeREST();
     private static int code;
 
@@ -29,52 +31,85 @@ public class EmployeeController {
         return false;
     }
 
+    public static boolean emptyFieldsValidation(String name, String lastName1, String lastName2, String rfc,
+            String tel, String adress, String genre, String puesto) {
+        if (name.trim().length() > 0 && name.trim().length() <= 64
+                || lastName1.trim().length() > 0 && lastName1.trim().length() <= 64
+                || lastName2.trim().length() > 0 && lastName2.trim().length() <= 64
+                || rfc.trim().length() > 0 && rfc.trim().length() <= 14
+                || adress.trim().length() > 0 && adress.trim().length() <= 200
+                || tel.trim().length() > 0 && tel.trim().length() <= 25
+                || puesto.trim().length() > 0 && puesto.trim().length() <= 20
+                || genre.trim().length() > 0 && genre.trim().length() <= 2) {
+            return true;
+        }
+        return false;
+    }
+
     public static String addEmployeeController(String name, String lastName1, String lastName2, String rfc,
-            String tel, String adress, String genre, String empPosition) {
+            String tel, String adress, String genre, String empPosition, String status, String charge, String conName, String pass) {
+        Consumer consumer = new Consumer();
         emp.setFirstName(name);
         emp.setLastName1(lastName1);
         emp.setLastName2(lastName2);
         emp.setRfc(rfc);
+        emp.setEmpNumber(generateEmployeeNumber(rfc));
         emp.setTelephone(tel);
         emp.setPerAddress(adress);
+        emp.setPhoto("photo");
         emp.setGender(genre);
         emp.setEmpPosition(empPosition);
-        empRest.addEmployee(emp);
-
+        if (status.equals("Activo")) {
+            emp.setEmpStatus(1);
+        } else {
+            emp.setEmpStatus(2);
+        }
+        consumer.setConName(conName);
+        consumer.setPass(pass);
+        consumer.setRole(charge);
+        emp.setConsumer(consumer);
+        code = empRest.addEmployee(emp);
         if (code != 200) {
             return "Error";
         } else {
-            return "Producto agregado.";
+            return "Empleado agregado.";
         }
     }
 
     public static String modifyEmployeeController(
-            String name, String lastName1, String lastName2, String rfc,
-            String tel, String adress, String genre, String empPosition, int empStatus, String photo, String charge,
+            String name, String lastName1, String lastName2,
+            String tel, String adress, String genre, String empPosition, String status, String charge,
             String pass, int empId, int conId, int perId
-    ) {
+    )// String photo,
+    {
+        Consumer consumer = new Consumer();
         emp.setFirstName(name);
         emp.setLastName1(lastName1);
         emp.setLastName2(lastName2);
-        emp.setRfc(rfc);
         emp.setTelephone(tel);
         emp.setPerAddress(adress);
         emp.setGender(genre);
         emp.setEmpPosition(empPosition);
-        emp.setEmpStatus(empStatus);
-        emp.setPhoto(photo);
-        emp.setEmpId(empId);
-
+        if (status.equals("Activo")) {
+            emp.setEmpStatus(1);
+        } else {
+            emp.setEmpStatus(2);
+        }
+        emp.setPhoto("photo");
+//        consumer.setConName(conName);
         consumer.setRole(charge);
         consumer.setConId(conId);
+        consumer.setPass(pass);
         emp.setConsumer(consumer);
-        emp.setIdPer(perId);
+        emp.setEmpId(empId);
+        consumer.setConId(conId);
+        emp.setPerId(perId);
 
         code = empRest.modifyEmployee(emp);
         if (code != 200) {
             return "Error";
         } else {
-            return "Producto modificado.";
+            return "Empleado modificado.";
         }
     }
 
@@ -84,7 +119,7 @@ public class EmployeeController {
         if (code != 200) {
             return "Error";
         } else {
-            return "Producto eliminado.";
+            return "Empleado eliminado.";
         }
     }
 
@@ -94,4 +129,10 @@ public class EmployeeController {
         return datosEmployee;
     }
 
+    public static String generateEmployeeNumber(String rfc) {
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
+        Date now = new Date();
+        String unique = "E" + rfc.substring(0, 4) + sdf.format(now);
+        return unique.toUpperCase();
+    }
 }

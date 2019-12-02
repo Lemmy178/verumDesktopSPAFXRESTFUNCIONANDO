@@ -32,12 +32,21 @@ public class EmployeeConsumeREST {
     public int addEmployee(Employee emp) {
         target = client.
                 target("http://localhost:8080/VerumRESTSpa2/api/employee/add");
-        response = target.queryParam("firstName", emp.getFirstName()).queryParam("lastName1", emp.getLastName1()).
-                queryParam("lastName2", emp.getLastName2()).queryParam("gender", emp.getGender()).queryParam("perAddress", emp.getPerAddress()).
-                queryParam("telephone", emp.getTelephone()).queryParam("rfc", emp.getRfc()).queryParam("empNumber", emp.getEmpNumber()).
-                queryParam("empPosition", emp.getEmpPosition()).queryParam("empStatus", emp.getEmpStatus()).queryParam("photo", emp.getPhoto()).
-                queryParam("conName", emp.getConsumer().getConName()).queryParam("pass", emp.getConsumer().getPass()).
-                queryParam("role", emp.getConsumer().getRole()).
+        response = target.
+                queryParam("firstName", emp.getFirstName()).
+                queryParam("lastName1", emp.getLastName1()).
+                queryParam("lastName2", emp.getLastName2()).
+                queryParam("gender", emp.getGender()).
+                queryParam("perAddress", emp.getPerAddress()).
+                queryParam("telephone", emp.getTelephone()).
+                queryParam("rfc", emp.getRfc()).
+                queryParam("empNumber", emp.getEmpNumber()).
+                queryParam("empPosition", emp.getEmpPosition()).
+                queryParam("empStatus", emp.getEmpStatus()).
+                queryParam("photo", emp.getPhoto()).
+                queryParam("conName", emp.getConsumer().getConName()).
+                queryParam("pass", emp.getConsumer().getPass()).
+                queryParam("charge", emp.getConsumer().getRole()).
                 request(MediaType.APPLICATION_JSON).post(null);
         statusCode = response.getStatus();
         return statusCode;
@@ -60,11 +69,10 @@ public class EmployeeConsumeREST {
                 queryParam("pass", emp.getConsumer().getPass()).
                 queryParam("empId", emp.getEmpId()).
                 queryParam("conId", emp.getConsumer().getConId()).
-                queryParam("perId", emp.getEmpId()).request().
+                queryParam("perId", emp.getPerId()).request().
                 put(entity(emp, MediaType.APPLICATION_JSON));
         statusCode = response.getStatus();
         return statusCode;
-
     }
 
     public int logicalDeleteEmployee(Employee emp) {

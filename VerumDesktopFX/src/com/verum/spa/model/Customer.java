@@ -8,11 +8,22 @@
  *===========================================================================*/
 package com.verum.spa.model;
 
-public class Customer extends Person {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Customer extends Person {
+    
+    @SerializedName("cusId")
+    @Expose
     private int cusId;
+    @SerializedName("uniqueNumber")
+    @Expose
     private String uniqueNumber;
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("cusStatus")
+    @Expose
     private int cusStatus;
     private Consumer consumer;
 

@@ -40,8 +40,8 @@ public class CustomerConsumeREST {
                 queryParam("perAddress", cus.getPerAddress()).
                 queryParam("telephone", cus.getTelephone()).
                 queryParam("rfc", cus.getRfc()).
-                //                queryParam("cusNumber", PENDIENTE).
-                //                queryParam("conName", PENDIENTE CONNAME ). 
+                queryParam("cusStatus", cus.getCusStatus()).
+                queryParam("conName", cus.getConsumer().getConName()).
                 queryParam("email", cus.getEmail()).
                 queryParam("uniqueNumber", cus.getUniqueNumber()).
                 queryParam("role", cus.getConsumer().getRole()).
@@ -52,7 +52,6 @@ public class CustomerConsumeREST {
     }
 
     public int modifyCustomer(Customer cus) {
-        cus.setUniqueNumber("");
         target = client.
                 target("http://localhost:8080/VerumRESTSpa2/api/customer/modify");
         response = target.
@@ -62,13 +61,13 @@ public class CustomerConsumeREST {
                 queryParam("gender", cus.getGender()).
                 queryParam("perAddress", cus.getPerAddress()).
                 queryParam("telephone", cus.getTelephone()).
-                queryParam("rfc", cus.getRfc()).
+                queryParam("pass", cus.getConsumer().getPass()).
                 queryParam("email", cus.getEmail()).
                 queryParam("cusStatus", cus.getCusStatus()).
                 queryParam("charge", cus.getConsumer().getRole()).
                 queryParam("conId", cus.getConsumer().getConId()).
                 queryParam("cusId", cus.getCusId()).
-                queryParam("perId", cus.getIdPer()).request()
+                queryParam("perId", cus.getPerId()).request()
                 .put(entity(cus, MediaType.APPLICATION_JSON));
         statusCode = response.getStatus();
         return statusCode;
