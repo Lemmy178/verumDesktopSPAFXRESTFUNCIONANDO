@@ -1,0 +1,21 @@
+#btnAdd{
+    -fx-background-color: #00C851;
+}
+#btnAdd:hover{
+    -fx-background-color: #03A343;
+}
+
+#btnUpdate{
+    -fx-background-color: #4285F4;
+}
+
+#btnUpdate:hover{
+    -fx-background-color: #1163EB;
+}
+
+#btnDelete{
+    -fx-background-color: #ff4444;
+}
+#btnDelete:hover{
+    -fx-background-color: #ED0505;
+}

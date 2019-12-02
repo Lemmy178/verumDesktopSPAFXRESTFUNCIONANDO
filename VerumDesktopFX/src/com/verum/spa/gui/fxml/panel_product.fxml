@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.verum.spa.gui.ProductWindowModify">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <TableView fx:id="tblProduct" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="90.0">
+                    <columns>
+                        <TableColumn fx:id="columnProductID" prefWidth="66.0" text="ID" />
+                        <TableColumn fx:id="columnProductName" prefWidth="243.0" text="Nombre" />
+                        <TableColumn fx:id="columnProductBrand" prefWidth="141.0" text="Marca" />
+                        <TableColumn fx:id="columnProductPrice" prefWidth="95.0" text="Precio" />
+                        <TableColumn fx:id="columnProductStatus" prefWidth="118.0" text="Estatus" />
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" layoutX="11.0" layoutY="37.0" prefHeight="40.0" prefWidth="455.0" spacing="50.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="37.0">
+                    <children>
+                  <JFXButton id="updateButton" fx:id="btnUpdate" accessibleText="NEW" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Actualizar" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../resources/icons8_update_left_rotation_25px_1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXCheckBox text="Listar Inactivos" />
+                    </children>
+                </HBox>
+                  <Label contentDisplay="CENTER" text="Lista  de productos" textAlignment="CENTER">
+                      <font>
+                          <Font size="26.0" />
+                      </font>
+                  </Label>
+            </children>
+        </AnchorPane>
+    </center>
+    <right>
+        <VBox prefHeight="500.0" prefWidth="320.0" style="-fx-border-color: none;" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane minWidth="293.0" prefHeight="9999.0" prefWidth="293.0">
+                    <children>
+                        <JFXTextField fx:id="txtProdName" focusColor="#009551" labelFloat="true" layoutX="26.0" layoutY="75.0" prefHeight="25.0" prefWidth="179.0" promptText="Nombre" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                        <JFXTextField fx:id="txtProdPrice" focusColor="#009551" labelFloat="true" layoutX="25.0" layoutY="127.0" prefHeight="25.0" prefWidth="179.0" promptText="Precio" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                        <JFXComboBox fx:id="cmbEstatus" editable="true" focusColor="#009551" layoutX="25.0" layoutY="182.0" prefHeight="25.0" prefWidth="205.0" promptText="Estatus" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                        <JFXComboBox fx:id="cmbBrand" editable="true" focusColor="#009551" layoutX="26.0" layoutY="237.0" prefHeight="25.0" prefWidth="243.0" promptText="Marca" unFocusColor="#00a65a" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <HBox alignment="CENTER" layoutY="336.0" prefHeight="43.0" prefWidth="200.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <JFXButton id="btnSucces" fx:id="btnNew" accessibleText="NEW" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Nuevo" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="btnInfo" fx:id="btnSave" accessibleText="SAVE" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Guardar" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_accept.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton id="deleteButton" fx:id="btnDelete" accessibleText="DELETE" buttonType="RAISED" stylesheets="@../css/GeneralStyles.css" text="Eliminar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/ico_del.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="60.0" layoutY="82.0" opacity="0.04" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="60.0">
+                          <image>
+                              <Image url="@../../../../../resources/cream2.png" />
+                          </image>
+                      </ImageView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </right>
+</BorderPane>

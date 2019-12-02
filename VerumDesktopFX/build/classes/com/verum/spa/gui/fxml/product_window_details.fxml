@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.verum.spa.gui.ProductWindowDetails">
+   <center>
+      <AnchorPane prefHeight="780.0" prefWidth="1080.0" style="-fx-background-color: #efefef;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" layoutX="29.0" layoutY="86.0" prefHeight="222.0" prefWidth="1080.0" spacing="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="273.0" prefWidth="428.0" style="-fx-background-color: #fff;">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <AnchorPane layoutX="17.0" layoutY="-51.0" prefHeight="191.0" prefWidth="208.0" style="-fx-background-color: ff9601;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/cream6.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="289.0" layoutY="16.0" text="Total" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="268.0" layoutY="45.0" text="de productos">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="308.0" layoutY="81.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="43.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="273.0" prefWidth="428.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <AnchorPane layoutX="17.0" layoutY="-51.0" prefHeight="191.0" prefWidth="208.0" style="-fx-background-color: ca433f;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/analytics3.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="257.0" layoutY="18.0" text="Productos">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="268.0" layoutY="45.0" text="desactivados">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="313.0" layoutY="83.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="43.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="20.0" layoutY="428.0" prefHeight="222.0" prefWidth="1080.0" spacing="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="273.0" prefWidth="428.0" style="-fx-background-color: #fff;">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <AnchorPane layoutX="17.0" layoutY="-51.0" prefHeight="191.0" prefWidth="208.0" style="-fx-background-color: #52b053;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/cream5.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="289.0" text="Total" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="268.0" layoutY="29.0" text="de productos">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="308.0" layoutY="139.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="43.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="278.0" layoutY="50.0" text="por tienda">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox focusColor="#009551" labelFloat="true" layoutX="239.0" layoutY="85.0" prefHeight="38.0" prefWidth="174.0" promptText="Tienda" unFocusColor="#00a65a" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="273.0" prefWidth="428.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <AnchorPane layoutX="17.0" layoutY="-51.0" prefHeight="191.0" prefWidth="208.0" style="-fx-background-color: #41aaca;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resources/analysis2.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="313.0" layoutY="140.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="43.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="289.0" layoutY="3.0" text="Total" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="268.0" layoutY="32.0" text="de productos">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="278.0" layoutY="53.0" text="por marca">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox focusColor="#009551" labelFloat="true" layoutX="239.0" layoutY="87.0" prefHeight="38.0" prefWidth="174.0" promptText="Marca" unFocusColor="#00a65a" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

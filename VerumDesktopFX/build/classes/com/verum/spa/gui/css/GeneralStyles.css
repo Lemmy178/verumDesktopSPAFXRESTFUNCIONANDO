@@ -1,0 +1,154 @@
+/*
+Colores de bootstrap
+danger-color
+#ff4444
+danger-color-dark
+#CC0000
+
+
+warning-color
+#ffbb33
+warning-color-dark
+#FF8800
+//rippler fill #f1ae27
+
+
+success-color
+#00C851
+success-color-dark
+#007E33
+//ripler fill #01ae46
+
+
+info-color
+#33b5e5
+info-color-dark
+#0099CC
+*/
+#nav{
+    -fx-background-color:  linear-gradient(to left, #0092a1, #00b37e, #35D635);
+}
+
+#btnAdm{
+    -fx-background-color: #FFBB33;
+}
+
+#btnDanger{
+    -fx-background-color:#ff4444;
+}
+
+#btnDanger:hover{
+    -fx-background-color:#CC0000;
+}
+
+#btnWarning{
+    -fx-background-color:#ffbb33;
+}
+
+#btnWarning:hover{
+    -fx-background-color:#FF8800;
+}
+
+#btnSucces{
+    -fx-background-color:#00C851;
+}
+
+#btnSucces:hover{
+    -fx-background-color:#007E33;
+}
+
+#btnInfo{
+    -fx-background-color:#33b5e5;
+}
+
+#btnInfo:hover{
+    -fx-background-color:#0099CC;
+}
+
+#btnCancel{
+    -fx-background-color:#6c757d;
+}
+
+#btnCancel:hover{
+    -fx-background-color:#17a2b8;
+}
+
+#searchBtn{
+    -fx-background-color: #89cb4e;
+    -fx-border-radius: 15;
+    -fx-background-radius: 16.4, 15;
+
+}
+
+#searchBtn:hover{
+    -fx-background-color: #76bd38;
+}
+
+
+#glass-grey {
+    -fx-background-color: 
+        #009551,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+#glass-grey:hover{
+    -fx-background-color: 
+        #00a65a,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+}
+#glass-grey-wrong{
+    -fx-background-color: 
+        #e30b0b,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+/*
+#addButton{
+    -fx-background-color: #00a65a;
+}
+#addButton:hover{
+    -fx-background-color: #009551;
+}
+
+#admButton{
+    -fx-background-color: #f39c12;
+}
+
+#admButton:hover{
+    -fx-background-color: #da8c10;
+}
+
+#listButton{
+    -fx-background-color: #605ca8;
+}
+#listButton:hover{
+    -fx-background-color: #565397;
+}
+>>>>>>> Stashed changes*/
+
+#deleteButton{
+    -fx-background-color: #ff4444;    
+}
+
+#deleteButton:hover{
+    -fx-background-color: #CC0000;    
+}
+
+#updateButton{
+    -fx-background-color: #c500f9;    
+}
+
+#updateButton:hover{
+    -fx-background-color: #9F00CC;    
+}
