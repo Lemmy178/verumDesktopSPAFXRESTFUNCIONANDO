@@ -16,16 +16,18 @@ public class EmployeeController {
     private static int code;
 
     public static boolean emptyFieldsValidation(String name, String lastName1, String lastName2, String rfc,
-            String tel, String adress, String genre, String email, String puesto) {
+            String tel, String adress, String genre, String puesto, String conName, String charge, String pass) {
         if (name.trim().length() > 0 && name.trim().length() <= 64
                 || lastName1.trim().length() > 0 && lastName1.trim().length() <= 64
                 || lastName2.trim().length() > 0 && lastName2.trim().length() <= 64
                 || rfc.trim().length() > 0 && rfc.trim().length() <= 14
                 || adress.trim().length() > 0 && adress.trim().length() <= 200
                 || tel.trim().length() > 0 && tel.trim().length() <= 25
-                || email.trim().length() > 0 && email.trim().length() <= 200
                 || puesto.trim().length() > 0 && puesto.trim().length() <= 20
-                || genre.trim().length() > 0 && genre.trim().length() <= 2) {
+                || pass.trim().length() > 0 && pass.trim().length() <= 48
+                || genre.trim().length() > 0 && genre.trim().length() <= 2
+                || charge.trim().length() > 0 && charge.trim().length() <= 24
+                || conName.trim().length() > 0 && conName.trim().length() <= 48) {
             return true;
         }
         return false;

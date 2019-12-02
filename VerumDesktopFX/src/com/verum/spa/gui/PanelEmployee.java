@@ -140,7 +140,7 @@ public class PanelEmployee implements Initializable {
                 String charge = txtEmpCharge.getText().trim();
                 String pass = txtEmpPass.getText().trim();
                 alert.setHeaderText("Alert:");
-                if (!EmployeeController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, empPosition, conName)) {
+                if (!EmployeeController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, empPosition, conName, charge, pass)) {
                     System.out.println("Nulo");
                     alert.setContentText("Todos los campos deben estar completos");
                     alert.showAndWait();
@@ -184,13 +184,12 @@ public class PanelEmployee implements Initializable {
                 String charge = txtEmpCharge.getText().trim();
                 String pass = txtEmpPass.getText().trim();
                 alert.setHeaderText("Alert:");
-                if (!EmployeeController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, empPosition)) {
+                if (!EmployeeController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, empPosition, conName, charge, pass)) {
                     System.out.println("Nulo");
                     alert.setContentText("Todos los campos deben estar completos");
                     alert.showAndWait();
                 } else {
                     Platform.runLater(() -> {
-                        //modify
                         String response = EmployeeController.modifyEmployeeController(name, lastName1, lastName2, telephone, perAddress,
                                 gender, empPosition, status, charge, pass, emp.getEmpId(), emp.getConsumer().getConId(), emp.getPerId());
                         alert.setContentText(response);
@@ -206,6 +205,11 @@ public class PanelEmployee implements Initializable {
                         txtEmpConName.setVisible(false);
                         txtEmpConName.setText("");
                         txtEmpPass.setText("");
+                        cmbEmpGender.setValue("");
+                        cmbEmpStatus.setValue("");
+                        btnNewEmployee.setDisable(false);
+                        btnDeleteEmployee.setDisable(true);
+                        btnSaveEmployee.setDisable(true);
                     });
                 }
             } catch (Exception e) {
@@ -231,6 +235,13 @@ public class PanelEmployee implements Initializable {
                 txtEmpConName.setVisible(false);
                 txtEmpConName.setText("");
                 txtEmpPass.setText("");
+                cmbEmpGender.setValue("");
+                cmbEmpStatus.setValue("");
+                cmbEmpStatus.setVisible(false);
+                txtEmpConName.setVisible(false);
+                btnNewEmployee.setDisable(false);
+                btnDeleteEmployee.setDisable(true);
+                btnSaveEmployee.setDisable(true);
             });
         });
         btnUpdate.setOnAction((event) -> {
@@ -251,6 +262,7 @@ public class PanelEmployee implements Initializable {
                 txtEmpRFC.setText(emp.getRfc());
                 txtEmpRFC.setEditable(false);
                 cmbEmpGender.setValue(emp.getGender());
+                cmbEmpStatus.setVisible(true);
                 if (emp.getEmpStatus() == 1) {
                     cmbEmpStatus.setValue("Activo");
                 } else {
@@ -306,6 +318,7 @@ public class PanelEmployee implements Initializable {
 
         cmbEmpStatus.getItems().add("Activo");
         cmbEmpStatus.getItems().add("Inactivo");
+        cmbEmpStatus.setVisible(false);
 
         txtEmpConName.setVisible(false);
     }

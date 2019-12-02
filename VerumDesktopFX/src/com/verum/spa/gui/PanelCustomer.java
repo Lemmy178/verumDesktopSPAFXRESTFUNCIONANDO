@@ -82,6 +82,9 @@ public class PanelCustomer implements Initializable {
     private JFXComboBox<String> cmbGenre;
 
     @FXML
+    private JFXComboBox<String> cmbCusStatus;
+
+    @FXML
     private Label lblClientNumber;
 
     @FXML
@@ -89,7 +92,7 @@ public class PanelCustomer implements Initializable {
 
     @FXML
     private JFXTextField txtCharge;
-    
+
     @FXML
     private JFXTextField txtCusConName;
 
@@ -137,7 +140,7 @@ public class PanelCustomer implements Initializable {
                 String conName = RFC.substring(0, 4).toLowerCase();
                 String charge = txtCharge.getText().trim();
                 alert.setHeaderText("Alert:");
-                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, passw,conName, charge)) {
+                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, passw, conName, charge)) {
                     System.out.println("Nulo");
                     alert.setContentText("Todos los campos deben estar completos");
                     alert.showAndWait();
@@ -154,10 +157,11 @@ public class PanelCustomer implements Initializable {
                         txtAddress.setText("");
                         txtEmail.setText("");
                         txtPassword.setText("");
+                        cmbGenre.setValue("");
+                        cmbCusStatus.setValue("");
                         btnNewCustomer.setDisable(false);
                         btnDeleteCustomer.setDisable(true);
                         btnSaveCustomer.setDisable(true);
-                        cmbGenre.setValue("");
                     });
                 }
             } catch (Exception e) {
@@ -178,10 +182,11 @@ public class PanelCustomer implements Initializable {
                 String email = txtEmail.getText().trim();
                 String pass = txtPassword.getText().trim();
                 String gender = cmbGenre.getValue().toString();
+                String status = cmbCusStatus.getValue().toString();
                 String conName = txtCusConName.getText().trim();
                 String charge = txtCharge.getText().trim();
                 alert.setHeaderText("Alert:");
-                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, pass,conName, charge)) {
+                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, pass, conName, charge)) {
                     System.out.println("Nulo");
                     alert.setContentText("Todos los campos deben estar completos");
                     alert.showAndWait();
@@ -189,7 +194,7 @@ public class PanelCustomer implements Initializable {
                     Platform.runLater(() -> {
                         //modify
                         String response = CustomerController.modifyCustomerController(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, pass,
-                                charge, cus.getCusStatus(), cus.getCusId(), cus.getConsumer().getConId(), cus.getPerId());
+                                charge, status, cus.getCusId(), cus.getConsumer().getConId(), cus.getPerId());
                         alert.setContentText(response);
                         alert.showAndWait();
                         txtCusName.setText("");
@@ -200,10 +205,12 @@ public class PanelCustomer implements Initializable {
                         txtAddress.setText("");
                         txtEmail.setText("");
                         txtPassword.setText("");
+                        cmbGenre.setValue("");
+                        cmbCusStatus.setValue("");
+                        txtCusConName.setVisible(false);
                         btnNewCustomer.setDisable(false);
                         btnDeleteCustomer.setDisable(true);
                         btnSaveCustomer.setDisable(true);
-                        cmbGenre.setValue("");
                     });
                 }
             } catch (Exception e) {
@@ -227,11 +234,14 @@ public class PanelCustomer implements Initializable {
                 txtEmail.setText("");
                 txtPassword.setText("");
                 txtCharge.setText("");
+                cmbGenre.setValue("");
+                cmbCusStatus.setValue("");
+                cmbCusStatus.setVisible(false);
+                txtCusConName.setVisible(false);
                 btnNewCustomer.setDisable(false);
                 btnDeleteCustomer.setDisable(true);
                 btnSaveCustomer.setDisable(true);
                 btnSaveCustomer.setDisable(true);
-                cmbGenre.setValue("");
             });
         });
         btnUpdate.setOnAction((event) -> {
@@ -254,6 +264,14 @@ public class PanelCustomer implements Initializable {
                 txtCusRFC.setEditable(false);
                 txtCharge.setText(customer.getConsumer().getRole());
                 cmbGenre.setValue(customer.getGender());
+                txtCusConName.setVisible(true);
+                txtCusConName.setText(customer.getConsumer().getConName());
+                cmbCusStatus.setVisible(true);
+                if (customer.getCusStatus() == 1) {
+                    cmbCusStatus.setValue("Activo");
+                } else {
+                    cmbCusStatus.setValue("Inactivo");
+                }
                 btnSaveCustomer.setDisable(false);
                 btnDeleteCustomer.setDisable(false);
                 btnNewCustomer.setDisable(true);
@@ -374,6 +392,11 @@ public class PanelCustomer implements Initializable {
         cmbGenre.getItems().add("M");
         cmbGenre.getItems().add("F");
         cmbGenre.getItems().add("O");
+
+        cmbCusStatus.getItems().add("Activo");
+        cmbCusStatus.getItems().add("Inactivo");
+        cmbCusStatus.setVisible(false);
+        
         txtCusConName.setVisible(false);
     }
 }
