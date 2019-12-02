@@ -137,7 +137,7 @@ public class PanelCustomer implements Initializable {
                 String conName = RFC.substring(0, 4).toLowerCase();
                 String charge = txtCharge.getText().trim();
                 alert.setHeaderText("Alert:");
-                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, passw)) {
+                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, passw,conName, charge)) {
                     System.out.println("Nulo");
                     alert.setContentText("Todos los campos deben estar completos");
                     alert.showAndWait();
@@ -178,9 +178,10 @@ public class PanelCustomer implements Initializable {
                 String email = txtEmail.getText().trim();
                 String pass = txtPassword.getText().trim();
                 String gender = cmbGenre.getValue().toString();
+                String conName = txtCusConName.getText().trim();
                 String charge = txtCharge.getText().trim();
                 alert.setHeaderText("Alert:");
-                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, pass)) {
+                if (!CustomerController.emptyFieldsValidation(name, lastName1, lastName2, RFC, telephone, perAddress, gender, email, pass,conName, charge)) {
                     System.out.println("Nulo");
                     alert.setContentText("Todos los campos deben estar completos");
                     alert.showAndWait();
