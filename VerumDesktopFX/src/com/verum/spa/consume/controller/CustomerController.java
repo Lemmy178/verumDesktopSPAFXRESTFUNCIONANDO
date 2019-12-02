@@ -60,7 +60,7 @@ public class CustomerController {
     public static String modifyCustomerController(
             String name, String lastName1, String lastName2, String rfc,
             String tel, String adress, String genre, String email, String pass, String charge,
-            int cusStatus, int cusId, int conId, int perId) {
+            String cusStatus, int cusId, int conId, int perId) {
         Consumer consumer = new Consumer();
         cus.setFirstName(name);
         cus.setLastName1(lastName1);
@@ -70,7 +70,11 @@ public class CustomerController {
         cus.setPerAddress(adress);
         cus.setGender(genre);
         cus.setEmail(email);
-        cus.setCusStatus(cusStatus);
+        if(cusStatus.equals("Activo")){
+            cus.setCusStatus(1);
+        } else {
+        cus.setCusStatus(2);
+        }
         consumer.setConId(conId);
         consumer.setPass(pass);
         consumer.setRole(charge);
